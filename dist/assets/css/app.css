@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Francois+One|Prata);
 .standard-backface {
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
@@ -403,13 +404,6 @@ img {
   /* 2 */
 }
 
-/**
- * Correct overflow displayed oddly in IE 9.
- */
-svg:not(:root) {
-  overflow: hidden;
-}
-
 /* ==========================================================================
    Figures
    ========================================================================== */
@@ -595,8 +589,81 @@ table {
   border-spacing: 0;
 }
 
-#target-div {
+/* ==========================================================================
+   Home page
+   ========================================================================== */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.4;
+  background-color: #F2EEEB;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Francois One", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: inherit;
+}
+
+.hero-header {
+  overflow: auto;
+  background-color: #674172;
+  padding: 0 0.75rem;
+  color: #FFFFFF;
+}
+
+.row {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 0.75rem;
+}
+
+dt,
+dd {
+  float: left;
+}
+
+dt {
+  position: relative;
+  clear: both;
+}
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+.badge {
+  position: relative;
+  overflow: hidden;
   width: 150px;
   height: 150px;
   border-radius: 50%;
+}
+
+.badge--purple {
+  border: 22px solid #674172;
+}
+
+/* ==========================================================================
+   SVG Circles
+   ========================================================================== */
+.tondo {
+  position: absolute;
+  top: 0;
+  overflow: visible;
+  fill: transparent;
+  pointer-events: none;
+}
+
+.tondo--small {
+  font-size: 20px;
+}
+
+.tondo--small textPath {
+  fill: #FFF;
+  font-weight: bold;
 }

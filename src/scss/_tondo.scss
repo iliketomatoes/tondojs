@@ -1,0 +1,40 @@
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+
+.badge {
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.badge--purple {
+    border: 22px solid $purple;
+}
+
+.badge__image {}
+
+
+/* ==========================================================================
+   SVG Circles
+   ========================================================================== */
+
+.tondo {
+	position: absolute;
+	top: 0;
+	overflow: visible;
+	fill: transparent;
+	pointer-events: none;
+}
+
+.tondo--small {
+	font-size: 20px;
+
+	textPath{
+		fill: #FFF;
+		font-weight: bold;
+	}
+}

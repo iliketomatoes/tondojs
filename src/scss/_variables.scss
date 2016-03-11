@@ -1,12 +1,9 @@
-//$elba : rgb(80,205,184);
-$elba : #6BB9F0;
-$brown : #965300;
-$shadow: rgba(50, 50, 50, 0.60);
+@import url(https://fonts.googleapis.com/css?family=Francois+One|Prata);
 
-$nav-arrow-background-color : $elba;
-$nav-arrow-color : #f3f6f5;
+$body-bg-color: #F2EEEB;
 
-$half-transparent: rgba(255,255,255,0.9);
+$purple: #674172;
 
-$header-font-family: 'Rufina', serif;
-$body-font-family: 'Lucida Console', Monaco, monospace;
+$header-font-family: 'Francois One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$header-font-color: $purple;
+$body-alt-family: Prata, Monaco, serif;

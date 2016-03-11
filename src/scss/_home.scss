@@ -1,5 +1,44 @@
-#target-div {
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
+/* ==========================================================================
+   Home page
+   ========================================================================== */
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    background-color: $body-bg-color;
+    color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $header-font-family;
+    color: inherit;
+}
+
+.hero-header {
+    overflow: auto;
+    background-color: $purple;
+    padding: 0 0.75rem;
+    color: #FFFFFF;
+}
+
+.row {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 0.75rem;
+}
+
+dt,
+dd {
+    float: left
+}
+
+dt {
+    position: relative;
+    clear: both
 }

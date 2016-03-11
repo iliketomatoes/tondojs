@@ -20,7 +20,13 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: [
+                    'src/transport.js',
+                    'src/intro.js',
+                    'src/helpers.js',
+                    'src/model.js',
                     'src/tondo.js',
+                    'src/events.js',
+                    'src/outro.js'
                 ],
                 dest: 'dist/tondo.js'
             },

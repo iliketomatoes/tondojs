@@ -333,14 +333,6 @@ img {
     -ms-interpolation-mode: bicubic; /* 2 */
 }
 
-/**
- * Correct overflow displayed oddly in IE 9.
- */
-
-svg:not(:root) {
-    overflow: hidden;
-}
-
 /* ==========================================================================
    Figures
    ========================================================================== */
