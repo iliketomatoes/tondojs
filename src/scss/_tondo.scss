@@ -10,13 +10,13 @@
 }
 
 .badge--big {
+	display: table;
 	width: 30vw;
     height: 30vw;
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 400px;
+    max-height: 400px;
     padding: 12px;
     border: 35px solid transparent;
-    line-height: 30vw;
     background-color: nth($palette-1, 5);
     text-align: center;
     
@@ -33,11 +33,11 @@
 .badge__paragraph {
 	// width: 100%;
 	// @include col-cstm(50%, 2);
+	display: table-cell;
+	vertical-align: middle;
 	position: relative;
-	display: inline-block;
 	font-size: 1.4rem;
 	font-family: $body-alt-font-family;
-	vertical-align: middle;
 	line-height: normal;
 	font-weight: bold;
 }

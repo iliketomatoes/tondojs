@@ -5,7 +5,6 @@ function Tondo(selector, options) {
     };
 
     var _createInstance = function(targetEl, GUID, options) {
-        console.log(targetEl);
         return Object.create(TondoModel, {
             target: {
                 writable: false,

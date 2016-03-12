@@ -20,13 +20,15 @@
             <h1>Tondo.js</h1>
         </div>
     </header>
-    <!--<svg class="tondo-svg" width="100%" height="100%" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+    <!--<svg class="tondo-svg" width="100%" height="500px" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <path id="test-path" d="M 100 200 
                                  C 200 100 300   0 400 100
                                  C 500 200 600 300 700 200
                                  C 800 100 900 100 900 100" />
             <path id="circlePath" d=" M 150, 150 m -120, 0 a 120,120 0 0,1 240,0 a 120,120 0 0,1 -240,0 " />
+            <path id="testArc" d='M 430,183 A 53,51 0 1 1 456,182'/>
+            <path id="testArc2" d='M 491,410 a 168,168 0 1 1 1,0'/>
         </defs>
         <g>
             <use xlink:href="#test-path" fill="none" stroke="red" />
@@ -42,7 +44,19 @@
                 <textPath xlink:href="#circlePath">A.C. Fiorentina</textPath>
             </text>
         </g>
-        <rect x="1" y="1" width="998" height="298" fill="none" stroke="black" stroke-width="2" />
+        <g>
+            <use xlink:href="#testArc" fill="none" stroke="green" />
+            <text font-family="Helvetica" font-size="20px">
+                <textPath xlink:href="#testArc">Test Arc</textPath>
+            </text>
+        </g>
+        <g>
+            <use xlink:href="#testArc2" fill="none" stroke="black" />
+            <text font-family="Helvetica" font-size="20px">
+                <textPath xlink:href="#testArc2" startOffset="50%" text-anchor="middle">Test Arc</textPath>
+            </text>
+        </g>
+        <rect x="1" y="1" width="998" height="498" fill="none" stroke="black" stroke-width="2" />
     </svg>-->
     <div class="row">
         <div class="badge badge--big">
@@ -76,20 +90,20 @@
         }, {
             text: 'est. 1926',
             side: 'down',
-            gap: 17
+            gap: 19
         }]
     });
 
     var anotherCircle = new Tondo('.badge--big', {
         classes: 'tondo tondo--big',
         circles: [{
-            text: 'Isn\'t it cool? You can write nice things',
+            text: 'Isn\'t it cool? I mean you can write nice stuff',
             side: 'up',
             gap: 6,
         }, {
-            text: 'Yes, I think it is. Also because it\'s not that simple',
+            text: 'Yes, I think it is. :-)',
             side: 'down',
-            gap: 23
+            gap: 25
         }]
     });
     </script>

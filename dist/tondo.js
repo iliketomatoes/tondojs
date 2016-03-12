@@ -25,42 +25,11 @@
 // Object storing TondoModel instances
 var Instances = {};
 
-// http://stackoverflow.com/a/18473154
-function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-    var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-
-    return {
-        x: centerX + (radius * Math.cos(angleInRadians)),
-        y: centerY + (radius * Math.sin(angleInRadians))
-    };
-}
-
-function describeArc(x, y, radius, startAngle, endAngle) {
-
-    var start = polarToCartesian(x, y, radius, endAngle);
-    var end = polarToCartesian(x, y, radius, startAngle);
-
-    var arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
+function describeArc(x, y, radius, arcSweep) {
 
     var d = [
-        'M', start.x, start.y,
-        'A', radius, radius, 0, arcSweep, 0, end.x, end.y
-    ].join(' ');
-
-    return d;
-}
-
-// http://stackoverflow.com/a/10477334
-function describeCircle(x, y, radius) {
-
-    var rCommaR = radius + ',' + radius;
-    var doubleRadius = radius * 2;
-
-    var d = [
-        'M', x, y,
-        'm', -radius, 0,
-        'a', rCommaR, '0 1,1', doubleRadius.toString().concat(',0'),
-        'a', rCommaR, '0 1,1', (-doubleRadius).toString().concat(',0')
+        'M', (x - 1), y,
+        'a', radius, radius, 0, 1, arcSweep, 1, 0
     ].join(' ');
 
     return d;
@@ -94,14 +63,11 @@ function generateGUID() {
     });
 }
 
-var ARC_START_ANGLE = 0.01;
-var ARC_END_ANGLE = 360;
-
 var TondoModel = {
     init: function() {
         this.proxy.targetWidth = this.getTargetWidth();
+        this.proxy.gap = this.getBiggestGap();
         this.setLayout();
-        this.setTextOffset();
     },
     /**
      * @return {Number}
@@ -114,25 +80,42 @@ var TondoModel = {
     getRadius: function(gap) {
         return (this.proxy.targetWidth / 2) + gap;
     },
-    setLayout: function() {
+    getBiggestGap: function (){
+    	var biggestGap = 0;
     	var circles = this.settings.circles;
-    	
-    	var targetWidth = this.proxy.targetWidth;
-        var biggestGap = 0;
 
         for(var i in circles) { 
         	if(circles[i].gap > biggestGap) biggestGap = circles[i].gap;
         }
 
-        var sideLength = targetWidth + (biggestGap * 2);
+        return biggestGap;
+    },
+    setLayout: function() {
+
+    	var circles, 
+    		targetWidth, 
+    		sideLength,
+    		d,
+    		svgURI,
+    		xLinkNS,
+    		svgEl,
+    		delta,
+    		viewBox,
+    		defs;
+
+    	circles = this.settings.circles;
+    	
+    	targetWidth = this.proxy.targetWidth;
+
+        sideLength = targetWidth + (this.proxy.gap * 2);
         
-        var d = document.createDocumentFragment();
+        d = document.createDocumentFragment();
 
         // SVG namespace
-        var svgURI = 'http://www.w3.org/2000/svg';
-        var xLinkNS = 'http://www.w3.org/1999/xlink';
+        svgURI = 'http://www.w3.org/2000/svg';
+        xLinkNS = 'http://www.w3.org/1999/xlink';
 
-        var svgEl = document.createElementNS(svgURI, 'svg');
+        svgEl = document.createElementNS(svgURI, 'svg');
 
         svgEl.setAttribute('class', this.settings.classes);
 
@@ -140,52 +123,60 @@ var TondoModel = {
         svgEl.setAttribute('height', sideLength);
         svgEl.setAttribute('data-tondo-id', this.GUID);
 
-        var delta = this.target.parentNode.clientHeight - sideLength;
-
+        delta = this.target.parentNode.clientHeight - sideLength;
+        
         svgEl.style.left = (delta / 2) + this.target.offsetLeft + 'px';
         svgEl.style.top = (delta / 2) + this.target.offsetTop + 'px';
 
         // SVG attributes, like viewBox, are camelCased. That threw me for a loop
-        var viewBox = [0, 0, sideLength, sideLength].join(' ');
+        viewBox = [0, 0, sideLength, sideLength].join(' ');
         svgEl.setAttribute('viewBox', viewBox);
 
-        var defs = document.createElementNS(svgURI, 'defs');
+        defs = document.createElementNS(svgURI, 'defs');
 
         for(var j in circles) {
 
-        	var radius = circles[j].radius || this.getRadius(circles[j].gap);
-        	var ID = this.GUID + '_' + j + '_' + circles[j].side;
+        	var radius,
+        		ID,
+        		circlePath,
+        		g,
+        		use,
+        		textPath,
+        		content,
+        		text;
 
-        	var circlePath = document.createElementNS(svgURI, 'path');
+        	radius = circles[j].radius || this.getRadius(circles[j].gap);
+        	ID = this.GUID + '_' + j + '_' + circles[j].side;
+
+        	circlePath = document.createElementNS(svgURI, 'path');
         	circlePath.setAttribute('id', ID);
         	if(circles[j].side === 'up') {
-		        circlePath.setAttribute('d', describeCircle((sideLength / 2), (sideLength / 2), radius));
+		        circlePath.setAttribute('d', describeArc((sideLength / 2), sideLength - (this.proxy.gap - circles[j].gap), radius, 1));
         	} else {
-        		circlePath.setAttribute('d', describeArc((sideLength / 2), (sideLength / 2), radius, ARC_START_ANGLE, ARC_END_ANGLE));
+        		var adjustY = delta < 0 ? -(delta) : 0;
+        		circlePath.setAttribute('d', describeArc((sideLength / 2), adjustY, radius, 0));
         	}
 
         	defs.appendChild(circlePath);
 
 	        // Set a new group
-	        var g = document.createElementNS(svgURI, 'g');
+	        g = document.createElementNS(svgURI, 'g');
 
-	        var use = document.createElementNS(svgURI, 'use');
+	        use = document.createElementNS(svgURI, 'use');
 	        use.setAttributeNS(xLinkNS ,'href', '#' + ID);
 	        g.appendChild(use);
 
 	        // Set text
-	        var textPath = document.createElementNS(svgURI, 'textPath');
+	        textPath = document.createElementNS(svgURI, 'textPath');
 	        textPath.setAttributeNS( xLinkNS,'href', '#' + ID);
-	        if(circles[j].side !== 'up') {
-	        	textPath.setAttribute('startOffset', '50%');
-	        	textPath.setAttribute('text-anchor', 'middle');
-	        }
-	        var content = circles[j].text;
+	        textPath.setAttribute('startOffset', '50%');
+	        textPath.setAttribute('text-anchor', 'middle');
+	       
+	        content = circles[j].text;
 
 	        textPath.textContent = content;
 
-	        var text = document.createElementNS(svgURI, 'text');
-	        text.setAttribute('id', ID + '_text');
+	        text = document.createElementNS(svgURI, 'text');
 
 	        text.appendChild(textPath);
 
@@ -198,26 +189,6 @@ var TondoModel = {
         d.appendChild(svgEl);
 
         this.target.parentNode.appendChild(d);
-    },
-    setTextOffset: function() {
-    	var circles = this.settings.circles;
-    	var svgEl = this.target.parentNode.querySelector('svg[data-tondo-id]');
-
-    	for(var i in circles) {
-    		if(circles[i].side === 'up') {
-    			var radius = circles[i].radius || this.getRadius(circles[i].gap);
-    			var ID = this.GUID + '_' + i + '_' + circles[i].side;
-
-    			var textEl = svgEl.getElementById(ID + '_text');
-    			
-		    	var textPath = textEl.querySelector('textPath');
-		    	var textLength = textEl.getComputedTextLength();
-
-		    	var quarterOfArc = getCirclePerimeter(radius) / 4;
-		    	var adjustedOffset = quarterOfArc - (textLength / 2);
-		    	textPath.setAttribute('startOffset', adjustedOffset);
-    		}
-    	}
     }
 };
 
@@ -228,7 +199,6 @@ function Tondo(selector, options) {
     };
 
     var _createInstance = function(targetEl, GUID, options) {
-        console.log(targetEl);
         return Object.create(TondoModel, {
             target: {
                 writable: false,

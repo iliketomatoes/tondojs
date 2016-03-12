@@ -1,39 +1,8 @@
-// http://stackoverflow.com/a/18473154
-function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-    var angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
-
-    return {
-        x: centerX + (radius * Math.cos(angleInRadians)),
-        y: centerY + (radius * Math.sin(angleInRadians))
-    };
-}
-
-function describeArc(x, y, radius, startAngle, endAngle) {
-
-    var start = polarToCartesian(x, y, radius, endAngle);
-    var end = polarToCartesian(x, y, radius, startAngle);
-
-    var arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
+function describeArc(x, y, radius, arcSweep) {
 
     var d = [
-        'M', start.x, start.y,
-        'A', radius, radius, 0, arcSweep, 0, end.x, end.y
-    ].join(' ');
-
-    return d;
-}
-
-// http://stackoverflow.com/a/10477334
-function describeCircle(x, y, radius) {
-
-    var rCommaR = radius + ',' + radius;
-    var doubleRadius = radius * 2;
-
-    var d = [
-        'M', x, y,
-        'm', -radius, 0,
-        'a', rCommaR, '0 1,1', doubleRadius.toString().concat(',0'),
-        'a', rCommaR, '0 1,1', (-doubleRadius).toString().concat(',0')
+        'M', (x - 1), y,
+        'a', radius, radius, 0, 1, arcSweep, 1, 0
     ].join(' ');
 
     return d;
