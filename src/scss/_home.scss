@@ -7,7 +7,7 @@ body {
     font-size: 1rem;
     line-height: 1.4;
     background-color: $body-bg-color;
-    color: #333;
+    color: $primary-text;
 }
 
 h1,
@@ -22,12 +22,12 @@ h6 {
 
 .hero-header {
     overflow: auto;
-    background-color: $purple;
-    padding: 0 0.75rem;
-    color: #FFFFFF;
+    color: inherit;
+    padding: 1rem 0;
 }
 
 .row {
+    position: relative;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 0.75rem;
@@ -41,4 +41,13 @@ dd {
 dt {
     position: relative;
     clear: both
+}
+
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+.white {
+    color: #FFFFFF;
 }

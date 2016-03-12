@@ -1,9 +1,14 @@
-@import url(https://fonts.googleapis.com/css?family=Francois+One|Prata);
+@import url(https://fonts.googleapis.com/css?family=Carrois+Gothic+SC|Cardo:400,400italic,700);
 
 $body-bg-color: #F2EEEB;
 
-$purple: #674172;
+$primary-text: rgba(#000, 0.84);
+$secondary-text: rgba(#000, 0.57);
 
-$header-font-family: 'Francois One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$header-font-family: 'Carrois Gothic SC', sans-serif;
+$body-alt-font-family: 'Cardo', serif;
+
+$palette-1: #F1F2EB, #06D6A0, #6B6D5E, #4BB3A1, #3D315B;
+
+$purple: nth($palette-1, 5);
 $header-font-color: $purple;
-$body-alt-family: Prata, Monaco, serif;

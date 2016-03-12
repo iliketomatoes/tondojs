@@ -1,4 +1,4 @@
 'use strict';
 
-// Object storing slider instances
+// Object storing TondoModel instances
 var Instances = {};

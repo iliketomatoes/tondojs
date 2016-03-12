@@ -1,4 +1,4 @@
-/*! tondo.js - v0.0.1 - 2016-03-11
+/*! tondo.js - v0.0.1 - 2016-03-12
 * https://github.com/iliketomatoes/tondojs
 * Copyright (c) 2016 ; Licensed  */
 (function(window, factory) {
@@ -22,7 +22,7 @@
 
 'use strict';
 
-// Object storing slider instances
+// Object storing TondoModel instances
 var Instances = {};
 
 // http://stackoverflow.com/a/18473154
@@ -100,7 +100,6 @@ var ARC_END_ANGLE = 360;
 var TondoModel = {
     init: function() {
         this.proxy.targetWidth = this.getTargetWidth();
-        this.proxy.targetCoordinates = this.getTargetCoordinates();
         this.setLayout();
         this.setTextOffset();
     },
@@ -108,10 +107,9 @@ var TondoModel = {
      * @return {Number}
      */
     getTargetWidth: function() {
-        return this.target.clientWidth;
-    },
-    getTargetCoordinates: function() {
-        return this.target.getBoundingClientRect();
+    	var targetHeight = this.target.clientHeight;
+    	var targetWidth = this.target.clientWidth;
+        return targetHeight <= targetWidth ? targetHeight : targetWidth;
     },
     getRadius: function(gap) {
         return (this.proxy.targetWidth / 2) + gap;
@@ -142,10 +140,10 @@ var TondoModel = {
         svgEl.setAttribute('height', sideLength);
         svgEl.setAttribute('data-tondo-id', this.GUID);
 
-        var delta = this.target.parentNode.clientWidth - sideLength;
+        var delta = this.target.parentNode.clientHeight - sideLength;
 
-        svgEl.style.left = (delta / 2) + 'px';
-        svgEl.style.top = (delta / 2) + 'px';
+        svgEl.style.left = (delta / 2) + this.target.offsetLeft + 'px';
+        svgEl.style.top = (delta / 2) + this.target.offsetTop + 'px';
 
         // SVG attributes, like viewBox, are camelCased. That threw me for a loop
         var viewBox = [0, 0, sideLength, sideLength].join(' ');
@@ -220,31 +218,13 @@ var TondoModel = {
 		    	textPath.setAttribute('startOffset', adjustedOffset);
     		}
     	}
-    },
-    setUpSidePath: function(radius) {
-        var circlePath = document.getElementById('circlePath');
-        circlePath.setAttribute('d', describeCircle(150, 150, 110));
-
-        var textTags = document.getElementsByTagName('text');
-        var textLength = textEl.getComputedTextLength();
-        var textPath = textEl.querySelector('textPath');
-        var quarterOfArc = getCirclePerimeter(110) / 4;
-        var adjustedOffset = quarterOfArc - (textLength / 2);
-
-        console.log(textEl.getComputedTextLength());
-        console.log(adjustedOffset);
-        textPath.setAttribute('startOffset', adjustedOffset);
-    },
-    setDownSidePath: function(radius) {
-        var path = document.getElementById('test-path');
-        path.setAttribute('d', describeArc(150, 150, 100, ARC_START_ANGLE, ARC_END_ANGLE));
-    },
+    }
 };
 
 function Tondo(selector, options) {
 
     var _defaults = {
-        classes: 'tondo',
+        classes: ''
     };
 
     var _createInstance = function(targetEl, GUID, options) {

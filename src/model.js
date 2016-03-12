@@ -4,7 +4,6 @@ var ARC_END_ANGLE = 360;
 var TondoModel = {
     init: function() {
         this.proxy.targetWidth = this.getTargetWidth();
-        this.proxy.targetCoordinates = this.getTargetCoordinates();
         this.setLayout();
         this.setTextOffset();
     },
@@ -12,10 +11,9 @@ var TondoModel = {
      * @return {Number}
      */
     getTargetWidth: function() {
-        return this.target.clientWidth;
-    },
-    getTargetCoordinates: function() {
-        return this.target.getBoundingClientRect();
+    	var targetHeight = this.target.clientHeight;
+    	var targetWidth = this.target.clientWidth;
+        return targetHeight <= targetWidth ? targetHeight : targetWidth;
     },
     getRadius: function(gap) {
         return (this.proxy.targetWidth / 2) + gap;
@@ -46,10 +44,10 @@ var TondoModel = {
         svgEl.setAttribute('height', sideLength);
         svgEl.setAttribute('data-tondo-id', this.GUID);
 
-        var delta = this.target.parentNode.clientWidth - sideLength;
+        var delta = this.target.parentNode.clientHeight - sideLength;
 
-        svgEl.style.left = (delta / 2) + 'px';
-        svgEl.style.top = (delta / 2) + 'px';
+        svgEl.style.left = (delta / 2) + this.target.offsetLeft + 'px';
+        svgEl.style.top = (delta / 2) + this.target.offsetTop + 'px';
 
         // SVG attributes, like viewBox, are camelCased. That threw me for a loop
         var viewBox = [0, 0, sideLength, sideLength].join(' ');

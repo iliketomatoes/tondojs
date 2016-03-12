@@ -33,110 +33,57 @@
   user-select: none;
 }
 
-.standard-backface{
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
-  -o-perspective: 1000;
-  perspective: 1000;
-}
-
-
-@mixin material-element{
-
-  -webkit-box-shadow: 1px 0px 2px 0px $shadow;
-  -moz-box-shadow:    1px 0px 2px 0px $shadow;
-  box-shadow:         1px 0px 2px 0px $shadow;
-
-  &:active{
-    -webkit-box-shadow: none;
-    -moz-box-shadow:    none;
-    box-shadow:         none;
-  }
-
-}
-
-@mixin transform($transforms) {
-     -moz-transform: $transforms;
-       -o-transform: $transforms;
-      -ms-transform: $transforms;
-  -webkit-transform: $transforms;
-          transform: $transforms;
-}
-
-@mixin loading($name){
-
-  &:before{
-    content:'';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-    width: 5.4rem;
-    height: 1.1rem;
-    margin-top: 0.5rem;
-    border-radius: 10px;
-    border: solid 0.1rem #DDDDDD;
-    //transform: translate(-50%, -50%);
-    @include transform(translate(-50%, -50%));
-    @extend .standard-backface;
-  }
-
-  &:after{
-    content:'';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0.8rem;
-    height: 0.8rem;
-    margin-top: 0.5rem;
-    z-index: 2;
-    border-radius: 50%;
-    background: rgba($elba, 0.6);
-    @include animation('load-animation 1s ease-in-out 0s infinite alternate');
-    @extend .standard-backface;
-  }
-
- 
-}
-
-
-
-@mixin keyframesGenerator($animation-name) {
-  @-webkit-keyframes #{$animation-name} {
-    @content;
-  }
-  @-moz-keyframes #{$animation-name} {
-    @content;
-  }  
-  @-ms-keyframes #{$animation-name} {
-    @content;
-  }
-  @-o-keyframes #{$animation-name} {
-    @content;
-  }  
-  @keyframes #{$animation-name} {
-    @content;
+// Prefixer
+@mixin prefixr ($attr, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$attr}: $value;
+    }
+    @else if $prefix == moz {
+      -moz-#{$attr}: $value;
+    }
+    @else if $prefix == cstm {
+      #{$attr}: $value;
+    }
   }
 }
-
-@mixin animation($str) {
-  -webkit-animation: #{$str};
-  -moz-animation: #{$str};
-  -ms-animation: #{$str};
-  -o-animation: #{$str};
-  animation: #{$str};      
+// Multicolumn @mixin
+@mixin col-cstm($col-width: 250px, $col-count: 0, $col-gap: 20px, $col-rule: false) {
+  $base-unit-type: 1px;
+  $base-unit-size: 1;
+  $base-unit: $base-unit-type * $base-unit-size !default;
+  @include prefixr(column-width, $col-width, webkit moz cstm);
+  @if type-of($col-count) == number and unitless($col-count) {
+    @include prefixr(column-count, $col-count, webkit moz cstm);
+  }
+  @else if type-of($col-count) == number and not unit($base-unit) != px {
+    @include prefixr(column-count, 2, webkit moz cstm);
+    $col-count: $col-gap;
+  }
+  @else if type-of($col-count) == number and not unitless($col-count) or length($col-count) > 1 {
+    @include prefixr(column-count, 2, webkit moz cstm);
+    $col-rule-coords: $col-count;
+      $width: nth($col-rule-coords, 1);
+      $style: nth($col-rule-coords, 2);
+      $color: nth($col-rule-coords, 3);
+      @include prefixr(column-rule, $width $style $color, webkit moz cstm);
+  }
+  @if length($col-gap) > 1 {
+    @include prefixr(column-gap, 20px, webkit moz cstm);
+    $col-rule-coords: $col-gap;
+      $width: nth($col-rule-coords, 1);
+      $style: nth($col-rule-coords, 2);
+      $color: nth($col-rule-coords, 3);
+      @include prefixr(column-rule, $width $style $color, webkit moz cstm);
+  }
+  @else if length($col-gap) == 1 {
+    @include prefixr(column-gap, $col-gap, webkit moz cstm);
+  }
+  @if $col-rule != false {
+    $col-rule-coords: $col-rule;
+      $width: nth($col-rule-coords, 1);
+      $style: nth($col-rule-coords, 2);
+      $color: nth($col-rule-coords, 3);
+      @include prefixr(column-rule, $width $style $color, webkit moz cstm);
+  }
 }
-
- 
-@include keyframesGenerator('load-animation') {
-  0% {  @include transform(translate(-2.5rem, -0.4rem)); }
-  100% {  @include transform(translate(1.7rem, -0.4rem));}
-}
- 
- 
