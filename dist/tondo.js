@@ -42,7 +42,11 @@ function getCirclePerimeter(radius) {
 function extend(a, b) {
     for (var key in b) {
         if (b.hasOwnProperty(key)) {
-            a[key] = b[key];
+            if (typeof b[key] === 'object' && b[key] !== null) {
+                a[key] = extend(a[key], b[key]);
+            } else {
+                a[key] = b[key];
+            }
         }
     }
     return a;
@@ -89,7 +93,7 @@ var TondoModel = {
      */
     getBiggestGap: function (){
     	var biggestGap = 0;
-    	var circles = this.settings.circles;
+    	var circles = [this.settings.tondoUp, this.settings.tondoDown];
 
         for(var i in circles) { 
         	if(circles[i].gap > biggestGap) biggestGap = circles[i].gap;
@@ -111,7 +115,8 @@ var TondoModel = {
     		viewBox,
     		defs;
 
-    	circles = this.settings.circles;
+    	circles = [this.settings.tondoUp, this.settings.tondoDown];
+    	console.log(circles);
     	
     	targetWidth = this.proxy.targetWidth;
 
@@ -165,7 +170,6 @@ var TondoModel = {
         	} else {
         		// Such an empirical forumula :-)
         		var adjustY = ((sideLength - (2*radius)) - this.proxy.gap + circles[j].gap);
-        		console.log(adjustY);
         		circlePath.setAttribute('d', describeArc((sideLength / 2), adjustY, radius, 0));
         	}
 
@@ -208,7 +212,17 @@ function Tondo(selector, options) {
 
     var _defaults = {
         defaultClass: 'tondo',
-        customClass: ''
+        customClass: '',
+        tondoUp: {
+            text: '',
+            gap: 0,
+            side: 'up'
+        },
+        tondoDown: {
+            text: '',
+            gap: 0,
+            side: 'down'
+        }
     };
 
     var _createInstance = function(targetEl, GUID, options) {

@@ -2,7 +2,17 @@ function Tondo(selector, options) {
 
     var _defaults = {
         defaultClass: 'tondo',
-        customClass: ''
+        customClass: '',
+        tondoUp: {
+            text: '',
+            gap: 0,
+            side: 'up'
+        },
+        tondoDown: {
+            text: '',
+            gap: 0,
+            side: 'down'
+        }
     };
 
     var _createInstance = function(targetEl, GUID, options) {

@@ -90,41 +90,38 @@
     <script>
     var circleText = new Tondo('.badge--purple', {
         customClass: 'tondo--small',
-        circles: [{
+        tondoUp: {
             text: 'A.C. Fiorentina',
-            side: 'up',
             gap: 4,
-        }, {
+        },
+        tondoDown: {
             text: 'est. 1926',
-            side: 'down',
-            gap: -10
-        }]
+            gap: 20
+        }
     });
 
     var anotherCircle = new Tondo('.badge--big', {
         customClass: 'tondo--big',
-        circles: [{
-            text: 'Isn\'t it cool? I mean you can write nice stuff',
-            side: 'up',
+        tondoUp: {
+            text: 'Isn\'t it cool?',
             gap: 6,
-        }, {
-            text: 'Yes, I think it is. :-)',
-            side: 'down',
+        },
+        tondoDown: {
+            text: 'Yes, I think it is :-)',
             gap: 24
-        }]
+        }
     });
 
     var thirdCircle = new Tondo('.badge--medium', {
         customClass: 'tondo--medium',
-        circles: [{
-            text: 'Bravo bravo bravo',
-            side: 'up',
+        tondoUp: {
+            text: 'This might really be a new trend',
             gap: 6,
-        }, {
-            text: 'Shake your booty!',
-            side: 'down',
-            gap: 24
-        }]
+        },
+        tondoDown: {
+            text: 'Maybe just for fashion blog. :-(',
+            gap: 26
+        }
     });
     </script>
 </body>
