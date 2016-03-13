@@ -62,11 +62,13 @@
         <div class="badge badge--big">
                 <p class="badge__paragraph white">Tondo.js lets you easily create great badges wrapped by some SVG curved text.</p>
         </div>
-    </div>
-    <div class="row">
         <div class="badge badge--medium">
                 <p class="badge__paragraph">It is a new design trend for fall/winter 2016. I think</p>
         </div>
+
+    </div>
+    <div class="row">
+        
     </div>
     <div class="row">
         <section>
@@ -87,7 +89,7 @@
     <script src="dist/tondo.js"></script>
     <script>
     var circleText = new Tondo('.badge--purple', {
-        classes: 'tondo tondo--small',
+        customClass: 'tondo--small',
         circles: [{
             text: 'A.C. Fiorentina',
             side: 'up',
@@ -100,7 +102,7 @@
     });
 
     var anotherCircle = new Tondo('.badge--big', {
-        classes: 'tondo tondo--big',
+        customClass: 'tondo--big',
         circles: [{
             text: 'Isn\'t it cool? I mean you can write nice stuff',
             side: 'up',
@@ -113,7 +115,7 @@
     });
 
     var thirdCircle = new Tondo('.badge--medium', {
-        classes: 'tondo tondo--medium',
+        customClass: 'tondo--medium',
         circles: [{
             text: 'Bravo bravo bravo',
             side: 'up',

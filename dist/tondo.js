@@ -106,6 +106,7 @@ var TondoModel = {
     		svgURI,
     		xLinkNS,
     		svgEl,
+    		classes,
     		delta,
     		viewBox,
     		defs;
@@ -122,9 +123,11 @@ var TondoModel = {
         svgURI = 'http://www.w3.org/2000/svg';
         xLinkNS = 'http://www.w3.org/1999/xlink';
 
+        classes = this.settings.defaultClass + ' ' + this.settings.customClass;
+
         svgEl = document.createElementNS(svgURI, 'svg');
 
-        svgEl.setAttribute('class', this.settings.classes);
+        svgEl.setAttribute('class', classes);
 
         svgEl.setAttribute('width', sideLength);
         svgEl.setAttribute('height', sideLength);
@@ -204,7 +207,8 @@ var TondoModel = {
 function Tondo(selector, options) {
 
     var _defaults = {
-        classes: ''
+        defaultClass: 'tondo',
+        customClass: ''
     };
 
     var _createInstance = function(targetEl, GUID, options) {

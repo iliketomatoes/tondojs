@@ -1,7 +1,8 @@
 function Tondo(selector, options) {
 
     var _defaults = {
-        classes: ''
+        defaultClass: 'tondo',
+        customClass: ''
     };
 
     var _createInstance = function(targetEl, GUID, options) {

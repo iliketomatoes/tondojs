@@ -525,6 +525,15 @@ h6 {
   padding: 0 0.75rem;
 }
 
+.row::before, .row::after {
+  content: '';
+  display: table;
+}
+
+.row::after {
+  clear: both;
+}
+
 dt,
 dd {
   float: left;
@@ -552,6 +561,7 @@ dt {
 .badge {
   position: relative;
   overflow: hidden;
+  float: left;
   margin-right: 3rem;
   -webkit-border-radius: 50%;
   border-radius: 50%;
