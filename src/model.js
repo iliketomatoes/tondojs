@@ -65,7 +65,7 @@ var TondoModel = {
         svgEl.setAttribute('height', sideLength);
         svgEl.setAttribute('data-tondo-id', this.GUID);
 
-        delta = this.target.parentNode.clientHeight - sideLength;
+        delta = this.target.offsetHeight - sideLength;
         
         svgEl.style.left = (delta / 2) + this.target.offsetLeft + 'px';
         svgEl.style.top = (delta / 2) + this.target.offsetTop + 'px';
