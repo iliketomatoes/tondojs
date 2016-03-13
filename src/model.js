@@ -12,9 +12,16 @@ var TondoModel = {
     	var targetWidth = this.target.clientWidth;
         return targetHeight <= targetWidth ? targetHeight : targetWidth;
     },
+    /**
+     * @param {Number}
+     * @return {Number}
+     */
     getRadius: function(gap) {
         return (this.proxy.targetWidth / 2) + gap;
     },
+    /**
+     * @return {Number}
+     */
     getBiggestGap: function (){
     	var biggestGap = 0;
     	var circles = this.settings.circles;
@@ -88,7 +95,9 @@ var TondoModel = {
         	if(circles[j].side === 'up') {
 		        circlePath.setAttribute('d', describeArc((sideLength / 2), sideLength - (this.proxy.gap - circles[j].gap), radius, 1));
         	} else {
-        		var adjustY = delta < 0 ? -(delta) : 0;
+        		// Such an empirical forumula :-)
+        		var adjustY = ((sideLength - (2*radius)) - this.proxy.gap + circles[j].gap);
+        		console.log(adjustY);
         		circlePath.setAttribute('d', describeArc((sideLength / 2), adjustY, radius, 0));
         	}
 

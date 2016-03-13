@@ -6,6 +6,8 @@
 .badge {
     position: relative;
     overflow: hidden;
+    // float: left;
+    margin-right: 3rem;
     @include border-radius(50%);
 }
 
@@ -19,6 +21,22 @@
     border: 35px solid transparent;
     background-color: nth($palette-1, 5);
     text-align: center;
+    z-index: 20;
+    
+}
+
+
+.badge--medium {
+	display: table;
+	width: 30vw;
+    height: 30vw;
+    max-width: 220px;
+    max-height: 220px;
+    padding: 12px;
+    border: 35px solid transparent;
+    background-color: $green;
+    text-align: center;
+    z-index: 20;
     
 }
 
@@ -70,5 +88,16 @@
 
 	textPath{
 		fill: nth($palette-1, 5);
+	}
+}
+
+
+.tondo--medium {
+	font-size: 22px;
+	font-weight: bold;
+	font-family: $body-font-family;
+
+	textPath{
+		fill: $primary-text;
 	}
 }

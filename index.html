@@ -64,6 +64,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="badge badge--medium">
+                <p class="badge__paragraph">It is a new design trend for fall/winter 2016. I think</p>
+        </div>
+    </div>
+    <div class="row">
         <section>
             <h2>It's rounder</h2>
         </section>
@@ -90,7 +95,7 @@
         }, {
             text: 'est. 1926',
             side: 'down',
-            gap: 19
+            gap: -10
         }]
     });
 
@@ -103,7 +108,20 @@
         }, {
             text: 'Yes, I think it is. :-)',
             side: 'down',
-            gap: 25
+            gap: 24
+        }]
+    });
+
+    var thirdCircle = new Tondo('.badge--medium', {
+        classes: 'tondo tondo--medium',
+        circles: [{
+            text: 'Bravo bravo bravo',
+            side: 'up',
+            gap: 6,
+        }, {
+            text: 'Shake your booty!',
+            side: 'down',
+            gap: 24
         }]
     });
     </script>
