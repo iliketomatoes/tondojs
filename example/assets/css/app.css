@@ -477,7 +477,7 @@ button {
 }
 
 .row {
-  max-width: 75rem;
+  max-width: 67.5rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1647,7 +1647,7 @@ a img {
 }
 
 hr {
-  max-width: 75rem;
+  max-width: 67.5rem;
   height: 0;
   border-right: 0;
   border-top: 0;
@@ -2090,7 +2090,7 @@ p + .stat {
   max-height: 260px;
   padding: 12px;
   border: 35px solid transparent;
-  background-color: #4BB3A1;
+  background-color: #4B77BE;
   text-align: center;
 }
 
@@ -2108,7 +2108,7 @@ p + .stat {
 }
 
 .badge--azure {
-  background-color: #4BB3A1;
+  background-color: #4B77BE;
   border-color: transparent;
 }
 

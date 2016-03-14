@@ -25,14 +25,14 @@
     </header>
     <div class="home-section">
         <div class="row">
-            <div class="small-12 medium-5 large-4 columns">
+            <div class="small-12 medium-5 columns">
                 <div class="badge badge--big badge--purple">
                     <p class="badge__paragraph white">Tondo.js lets you easily create some SVG curved text to wrap HTML round badges.</p>
                 </div>
             </div>
-            <div class="medium-7 large-8 columns">
+            <div class="medium-7 columns">
                 <article>
-                    <h2>It's not that common seeing curved text on the internet.</h2>
+                    <h2>It's not that common to see curved text on the internet.</h2>
                     <p>If you wanted to style some text that way, till now you could do that with a couple of jQuery plugins, which however offer less power - compared to this plugin - and have some third-parties dependencies:</p>
                     <ul>
                         <li>
@@ -54,11 +54,13 @@
 
     <div class="home-section">
         <div class="row">
-            <div class="small-12 medium-8 columns">
+            <div class="small-12 medium-7 columns">
                 <h2>This plugin is different.</h2>
-                <p>It's just <i>~5kB</i> of plain Javascript, and a couple of CSS rules. With Tondo.js an SVG element get absolutely placed over the HTML target. Inside that SVG element, Tondo draws up to 2 arcs, one for placing text on the top of the circle, the other one for placing text on the bottom.</p>
+                <p>It just takes <i>~5kB</i> of plain Javascript, and a couple of CSS rules. With Tondo.js, an SVG element gets absolutely placed over the HTML target. Inside that SVG element, Tondo draws up to 2 arcs, one for placing text on the top of the circle, the other one for placing text on the bottom.</p>
+
+                <p>This plugin only makes sense when you <strong>target a round HTML element</strong>.</p>
             </div>
-            <div class="small-12 medium-4 columns">
+            <div class="small-12 medium-5 columns">
                 <div class="badge badge--big badge--azure">
                     <p class="badge__paragraph white">It is a new design trend for the next season. You'll see it everywhere.</p>
                 </div>
@@ -68,12 +70,12 @@
 
    <div class="home-section">
         <div class="row">
-            <div class="small-12 medium-4 columns">
+            <div class="small-12 medium-5 columns">
                 <div class="badge badge--big badge--dark">
                     <p class="badge__paragraph badge__paragraph--bio">You can find me on <a href="https://twitter.com/GSoverini/">Twitter</a> and on <a href="https://github.com/iliketomatoes">Github</a></p>
                 </div>
             </div>
-            <div class="small-12 medium-8 columns">
+            <div class="small-12 medium-7 columns">
                 <h2>TODO documentation</h2>
             </div>
         </div>
@@ -94,11 +96,11 @@
     var secondCircle = new Tondo('.badge--azure', {
         customClass: 'tondo--azure',
         tondoUp: {
-            text: 'fall winter',
+            text: 'Fall winter',
             gap: -32
         },
         tondoDown: {
-            text: '2016 - 2017',
+            text: 'collection 2016 - 2017',
             textPathClass: 'textPath-small',
             gap: -14
         }

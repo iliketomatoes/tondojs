@@ -2,14 +2,14 @@
 
 $body-bg-color: #F2EEEB;
 
-$primary-text: rgba(#000, 0.84);
-$secondary-text: rgba(#000, 0.6);
+$primary-text: rgba(0,0,0,.84);
+$secondary-text: rgba(0,0,0,.6);
 
 $header-custom-font-family: 'Carrois Gothic SC', sans-serif;
 $body-custom-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $body-alt-font-family: 'Cardo', serif;
 
-$palette-1: #F1F2EB, #06D6A0, #6B6D5E, #4BB3A1, #8E44AD;
+$palette-1: #F1F2EB, #06D6A0, #6B6D5E, #4B77BE, #8E44AD;
 
 $purple: nth($palette-1, 5);
 $azure: nth($palette-1, 4);
