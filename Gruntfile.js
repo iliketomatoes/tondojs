@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                     'src/events.js',
                     'src/outro.js'
                 ],
-                dest: 'dist/tondo.js'
+                dest: 'dist/js/tondo.js'
             },
         },
         uglify: {
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: '<%= concat.dist.dest %>',
-                dest: 'dist/tondo.min.js'
+                dest: 'dist/js/tondo.min.js'
             },
         },
         jshint: {
@@ -55,16 +55,18 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
+                    includePaths: ['bower_components/foundation-sites/scss'],
                     outputStyle: 'expanded'
                 },
                 files: {
-                    'dist/assets/css/app.css': 'src/scss/app.scss'
+                    'example/assets/css/app.css': 'example/assets/scss/app.scss',
+                    'dist/css/tondo.css': 'src/scss/tondo.scss'
                 }
             }
         },
         watch: {
             styling: {
-                files: ['src/scss/**/*.scss'],
+                files: ['example/assets/scss/**/*.scss', 'src/scss/tondo.scss'],
                 tasks: ['sass']
             },
             chaining: {

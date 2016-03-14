@@ -1,0 +1,20 @@
+/* ==========================================================================
+   TONDO DEFAULT CLASSES
+   ========================================================================== */
+svg:not(:root) {
+  overflow: inherit;
+}
+
+.tondo {
+  position: absolute;
+  top: 0;
+  overflow: visible;
+  fill: transparent;
+  pointer-events: none;
+  will-change: transform;
+  visibility: hidden;
+}
+
+.tondo--loaded {
+  visibility: visible;
+}

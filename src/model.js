@@ -29,13 +29,12 @@ var TondoModel = {
      */
     getBiggestGap: function() {
         var gap;
-        var biggestGap = 0;
+        var biggestGap = -Infinity;
         var circles = this.getCircles();
 
         for (var i in circles) {
             gap = circles[i].gap;
             if (circles[i].side === 'down') gap += parseFloat(circles[i].fontSize);
-            console.log(gap);
             if (gap > biggestGap) biggestGap = gap;
         }
 
@@ -174,9 +173,16 @@ var TondoModel = {
                 radius = this.getRadius(circles[i].gap);
                 circlePath.setAttribute('d', describeArc((sideLength / 2), sideLength - (this.proxy.gap - circles[i].gap), radius, 1));
             } else {
-                radius = this.getRadius(circles[i].gap + parseFloat(circles[i].fontSize));
+                
                 // Such an empirical forumula :-)
-                adjustY = (sideLength - (2 * radius));
+                if (circles[i].gap < 0) {
+                    radius = this.getRadius(circles[i].gap);
+                    adjustY = (sideLength - (2 * radius) - parseFloat(circles[i].fontSize));
+                } else {
+                    radius = this.getRadius(circles[i].gap + parseFloat(circles[i].fontSize));
+                    adjustY = (sideLength - (2 * radius));
+                }
+
                 circlePath.setAttribute('d', describeArc((sideLength / 2), adjustY, radius, 0));
             }
         }

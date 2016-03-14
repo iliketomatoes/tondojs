@@ -1,6 +1,6 @@
 var Eventie = {
     init: function() {
-        var debouncedCheck = debounce(this.checkTargetsSizeChange, 300);
+        var debouncedCheck = debounce(this.checkTargetsSizeChange, 700);
         window.onresize = debouncedCheck;
     },
     checkTargetsSizeChange: function() {

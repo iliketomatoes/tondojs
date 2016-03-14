@@ -2,6 +2,10 @@
    TONDO DEFAULT CLASSES
    ========================================================================== */
 
+svg:not(:root) {
+    overflow: inherit;
+}
+
 .tondo {
 	position: absolute;
 	top: 0;

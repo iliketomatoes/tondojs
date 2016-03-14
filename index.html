@@ -7,7 +7,8 @@
     <title>Tondo.js</title>
     <meta name="description" content="Tondo.js lets you easily create some SVG curved text to wrap HTML round badges">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="dist/assets/css/app.css">
+    <link rel="stylesheet" href="example/assets/css/app.css">
+    <link rel="stylesheet" href="dist/css/tondo.css">
     <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
             <script>window.html5 || document.write('<script src="dist/assets/js/html5shiv.js"><\/script>')</script>
@@ -17,50 +18,71 @@
 <body>
     <header class="hero-header">
         <div class="row">
-            <h1>Tondo.js</h1>
+            <div class="small-12 columns">
+                <h1>Tondo.js</h1>
+            </div>
         </div>
     </header>
-    <div class="row">
-        <div class="badge badge--big">
-                <p class="badge__paragraph white">Tondo.js lets you easily create some SVG curved text to wrap HTML round badges</p>
-        </div>
-        <div class="badge badge--medium">
-                <p class="badge__paragraph">It is a new design trend for fall/winter 2016. I think</p>
-        </div>
-    </div>
-    <div class="row">
-        
-    </div>
-    <div class="row">
-        <section>
-            <h2>It's rounder</h2>
-        </section>
-        <dl>
-            <dt>
-                <div class="badge badge--purple">
-                    <a href="http://fiorentina.it"><img src="http://placehold.it/150x150"></a>
+    <div class="home-section">
+        <div class="row">
+            <div class="small-12 medium-5 large-4 columns">
+                <div class="badge badge--big badge--purple">
+                    <p class="badge__paragraph white">Tondo.js lets you easily create some SVG curved text to wrap HTML round badges.</p>
                 </div>
-            </dt>
-            <dd>
-                This plugin lets you wrap elements with a curved SVG text.
-            </dd>
-        </dl>
+            </div>
+            <div class="medium-7 large-8 columns">
+                <article>
+                    <h2>It's not that common seeing curved text on the internet.</h2>
+                    <p>If you wanted to style some text that way, till now you could do that with a couple of jQuery plugins, which however offer less power - compared to this plugin - and have some third-parties dependencies:</p>
+                    <ul>
+                        <li>
+                            <a href="http://tympanus.net/codrops/2012/01/24/arctext-js-curving-text-with-css3-and-jquery/">
+                                Arctext.js
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://circletype.labwire.ca/">
+                                CircleType.js
+                            </a>
+                        </li>
+                    </ul>
+                    <p>Both of those plugins shred the text inside the HTML elements they are applied on, then they build an arc of spans element, one for each letter of the text node. They leverage the CSS <i>rotate()</i> transform.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div class="home-section">
+        <div class="row">
+            <div class="small-12 medium-8 columns">
+                <h2>This plugin is different.</h2>
+                <p>It's just <i>~5kB</i> of plain Javascript, and a couple of CSS rules. With Tondo.js an SVG element get absolutely placed over the HTML target. Inside that SVG element, Tondo draws up to 2 arcs, one for placing text on the top of the circle, the other one for placing text on the bottom.</p>
+            </div>
+            <div class="small-12 medium-4 columns">
+                <div class="badge badge--big badge--azure">
+                    <p class="badge__paragraph white">It is a new design trend for the next season. You'll see it everywhere.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div class="home-section">
+        <div class="row">
+            <div class="small-12 medium-4 columns">
+                <div class="badge badge--big badge--dark">
+                    <p class="badge__paragraph badge__paragraph--bio">You can find me on <a href="https://twitter.com/GSoverini/">Twitter</a> and on <a href="https://github.com/iliketomatoes">Github</a></p>
+                </div>
+            </div>
+            <div class="small-12 medium-8 columns">
+                <h2>TODO documentation</h2>
+            </div>
+        </div>
     </div>
     <a href="https://github.com/iliketomatoes/tondojs"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
-    <script src="dist/tondo.js"></script>
+    <script src="dist/js/tondo.js"></script>
     <script>
-    var circleText = new Tondo('.badge--purple', {
-        customClass: 'tondo--small',
-        tondoUp: {
-            text: 'A.C. Fiorentina'
-        },
-        tondoDown: {
-            text: 'est. 1926'
-        }
-    });
-
-    var anotherCircle = new Tondo('.badge--big', {
-        customClass: 'tondo--big',
+    var circle = new Tondo('.badge--purple', {
+        customClass: 'tondo--purple',
         tondoUp: {
             text: 'Isn\'t it cool?'
         },
@@ -69,13 +91,26 @@
         }
     });
 
-    var thirdCircle = new Tondo('.badge--medium', {
-        customClass: 'tondo--medium',
+    var secondCircle = new Tondo('.badge--azure', {
+        customClass: 'tondo--azure',
         tondoUp: {
-            text: 'This might really be a new trend'
+            text: 'fall winter',
+            gap: -32
         },
         tondoDown: {
-            text: 'Maybe just for fashion blogs'
+            text: '2016 - 2017',
+            textPathClass: 'textPath-small',
+            gap: -14
+        }
+    });
+
+    var anotherCircle = new Tondo('.badge--dark', {
+        customClass: 'tondo--dark',
+        tondoUp: {
+            text: 'Created with love'
+        },
+        tondoDown: {
+            text: 'by Giancarlo Soverini'
         }
     });
     </script>
