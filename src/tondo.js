@@ -5,13 +5,21 @@ function Tondo(selector, options) {
         customClass: '',
         tondoUp: {
             text: '',
-            gap: 0,
-            side: 'up'
+            gap: 5,
+            side: 'up',
+            startOffset: '50%',
+            textAnchor: 'middle',
+            textPathClass: '',
+            fontSize: '',
         },
         tondoDown: {
             text: '',
             gap: 0,
-            side: 'down'
+            side: 'down',
+            startOffset: '50%',
+            textAnchor: 'middle',
+            textPathClass: '',
+            fontSize: ''
         }
     };
 

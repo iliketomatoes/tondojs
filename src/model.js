@@ -1,15 +1,14 @@
 var TondoModel = {
     init: function() {
-        this.proxy.targetWidth = this.getTargetWidth();
-        this.proxy.gap = this.getBiggestGap();
         this.setLayout();
+        this.setTondo();
     },
     /**
      * @return {Number}
      */
     getTargetWidth: function() {
-    	var targetHeight = this.target.clientHeight;
-    	var targetWidth = this.target.clientWidth;
+        var targetHeight = this.target.clientHeight;
+        var targetWidth = this.target.clientWidth;
         return targetHeight <= targetWidth ? targetHeight : targetWidth;
     },
     /**
@@ -20,57 +19,140 @@ var TondoModel = {
         return (this.proxy.targetWidth / 2) + gap;
     },
     /**
+     * @return {Array of Objects}
+     */
+    getCircles: function() {
+        return [this.settings.tondoUp, this.settings.tondoDown];
+    },
+    /**
      * @return {Number}
      */
-    getBiggestGap: function (){
-    	var biggestGap = 0;
-    	var circles = [this.settings.tondoUp, this.settings.tondoDown];
+    getBiggestGap: function() {
+        var gap;
+        var biggestGap = 0;
+        var circles = this.getCircles();
 
-        for(var i in circles) { 
-        	if(circles[i].gap > biggestGap) biggestGap = circles[i].gap;
+        for (var i in circles) {
+            gap = circles[i].gap;
+            if (circles[i].side === 'down') gap += parseFloat(circles[i].fontSize);
+            console.log(gap);
+            if (gap > biggestGap) biggestGap = gap;
         }
 
         return biggestGap;
     },
     setLayout: function() {
 
-    	var circles, 
-    		targetWidth, 
-    		sideLength,
-    		d,
-    		svgURI,
-    		xLinkNS,
-    		svgEl,
-    		classes,
-    		delta,
-    		viewBox,
-    		defs;
+        var circles,
+            d,
+            svgURI,
+            xLinkNS,
+            svgEl,
+            svgElClasses,
+            defs;
 
-    	circles = [this.settings.tondoUp, this.settings.tondoDown];
-    	console.log(circles);
-    	
-    	targetWidth = this.proxy.targetWidth;
+        circles = this.getCircles();
 
-        sideLength = targetWidth + (this.proxy.gap * 2);
-        
         d = document.createDocumentFragment();
 
         // SVG namespace
         svgURI = 'http://www.w3.org/2000/svg';
         xLinkNS = 'http://www.w3.org/1999/xlink';
 
-        classes = this.settings.defaultClass + ' ' + this.settings.customClass;
+        svgElClasses = this.settings.defaultClass + ' ' + this.settings.customClass;
 
         svgEl = document.createElementNS(svgURI, 'svg');
 
-        svgEl.setAttribute('class', classes);
+        svgEl.setAttribute('class', svgElClasses);
+        svgEl.setAttribute('id', this.GUID);
+
+        defs = document.createElementNS(svgURI, 'defs');
+
+        for (var j in circles) {
+
+            var circlePathID,
+                textPathID,
+                circlePath,
+                g,
+                use,
+                textPath,
+                content,
+                text;
+
+            circlePathID = this.GUID + '_' + j + '_' + circles[j].side + '_path';
+
+            circlePath = document.createElementNS(svgURI, 'path');
+            circlePath.setAttribute('id', circlePathID);
+
+            defs.appendChild(circlePath);
+
+            // Set a new group
+            g = document.createElementNS(svgURI, 'g');
+
+            use = document.createElementNS(svgURI, 'use');
+            use.setAttributeNS(xLinkNS, 'href', '#' + circlePathID);
+            g.appendChild(use);
+
+            // Set text
+            textPathID = this.GUID + '_' + j + '_' + circles[j].side + '_textPath';
+            textPath = document.createElementNS(svgURI, 'textPath');
+            textPath.setAttributeNS(xLinkNS, 'href', '#' + circlePathID);
+            textPath.setAttribute('id', textPathID);
+            textPath.setAttribute('startOffset', circles[j].startOffset);
+            textPath.setAttribute('text-anchor', circles[j].textAnchor);
+            textPath.setAttribute('class', circles[j].textPathClass);
+
+            content = circles[j].text;
+
+            textPath.textContent = content;
+
+            text = document.createElementNS(svgURI, 'text');
+
+            text.appendChild(textPath);
+
+            g.appendChild(text);
+
+            svgEl.appendChild(defs);
+            svgEl.appendChild(g);
+        }
+
+        d.appendChild(svgEl);
+
+        this.target.parentNode.appendChild(d);
+    },
+    setTondo: function() {
+        var svgEl,
+            circles,
+            svgElClasses,
+            sideLength,
+            viewBox,
+            delta;
+
+        svgEl = document.getElementById(this.GUID);
+        circles = this.getCircles();
+        svgElClasses = svgEl.getAttribute('class');
+
+        for (var j in circles) {
+            var textPathID,
+                textPath;
+
+            textPathID = this.GUID + '_' + j + '_' + circles[j].side + '_textPath';
+            textPath = document.getElementById(textPathID);
+            // Register the fontSize
+            circles[j].fontSize = window.getComputedStyle(textPath, null).getPropertyValue('font-size');
+        }
+
+        // After we have registered the fontSize, we compute the biggest gap
+        this.proxy.gap = this.getBiggestGap();
+        this.proxy.targetWidth = this.getTargetWidth();
+        sideLength = this.proxy.targetWidth + (this.proxy.gap * 2);
+
 
         svgEl.setAttribute('width', sideLength);
         svgEl.setAttribute('height', sideLength);
-        svgEl.setAttribute('data-tondo-id', this.GUID);
 
         delta = this.target.offsetHeight - sideLength;
-        
+
         svgEl.style.left = (delta / 2) + this.target.offsetLeft + 'px';
         svgEl.style.top = (delta / 2) + this.target.offsetTop + 'px';
 
@@ -78,63 +160,27 @@ var TondoModel = {
         viewBox = [0, 0, sideLength, sideLength].join(' ');
         svgEl.setAttribute('viewBox', viewBox);
 
-        defs = document.createElementNS(svgURI, 'defs');
+        for (var i in circles) {
+            var circlePathID,
+                circlePath,
+                radius;
 
-        for(var j in circles) {
+            var adjustY = 0;
 
-        	var radius,
-        		ID,
-        		circlePath,
-        		g,
-        		use,
-        		textPath,
-        		content,
-        		text;
+            circlePathID = this.GUID + '_' + i + '_' + circles[i].side + '_path';
+            circlePath = document.getElementById(circlePathID);
 
-        	radius = circles[j].radius || this.getRadius(circles[j].gap);
-        	ID = this.GUID + '_' + j + '_' + circles[j].side;
-
-        	circlePath = document.createElementNS(svgURI, 'path');
-        	circlePath.setAttribute('id', ID);
-        	if(circles[j].side === 'up') {
-		        circlePath.setAttribute('d', describeArc((sideLength / 2), sideLength - (this.proxy.gap - circles[j].gap), radius, 1));
-        	} else {
-        		// Such an empirical forumula :-)
-        		var adjustY = ((sideLength - (2*radius)) - this.proxy.gap + circles[j].gap);
-        		circlePath.setAttribute('d', describeArc((sideLength / 2), adjustY, radius, 0));
-        	}
-
-        	defs.appendChild(circlePath);
-
-	        // Set a new group
-	        g = document.createElementNS(svgURI, 'g');
-
-	        use = document.createElementNS(svgURI, 'use');
-	        use.setAttributeNS(xLinkNS ,'href', '#' + ID);
-	        g.appendChild(use);
-
-	        // Set text
-	        textPath = document.createElementNS(svgURI, 'textPath');
-	        textPath.setAttributeNS( xLinkNS,'href', '#' + ID);
-	        textPath.setAttribute('startOffset', '50%');
-	        textPath.setAttribute('text-anchor', 'middle');
-	       
-	        content = circles[j].text;
-
-	        textPath.textContent = content;
-
-	        text = document.createElementNS(svgURI, 'text');
-
-	        text.appendChild(textPath);
-
-	        g.appendChild(text);	       
-
-	        svgEl.appendChild(defs);
-	        svgEl.appendChild(g);
+            if (circles[i].side === 'up') {
+                radius = this.getRadius(circles[i].gap);
+                circlePath.setAttribute('d', describeArc((sideLength / 2), sideLength - (this.proxy.gap - circles[i].gap), radius, 1));
+            } else {
+                radius = this.getRadius(circles[i].gap + parseFloat(circles[i].fontSize));
+                // Such an empirical forumula :-)
+                adjustY = (sideLength - (2 * radius));
+                circlePath.setAttribute('d', describeArc((sideLength / 2), adjustY, radius, 0));
+            }
         }
 
-        d.appendChild(svgEl);
-
-        this.target.parentNode.appendChild(d);
+        svgEl.setAttribute('class', svgElClasses + ' tondo--loaded');
     }
 };

@@ -499,7 +499,7 @@ body {
   font-size: 1rem;
   line-height: 1.4;
   background-color: #F2EEEB;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.84);
 }
 
 h1,
@@ -548,7 +548,7 @@ dt {
    UTILITIES
    ========================================================================== */
 .white {
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
 .gray {
@@ -590,7 +590,7 @@ dt {
   max-height: 220px;
   padding: 12px;
   border: 35px solid transparent;
-  background-color: #06D6A0;
+  background-color: #4BB3A1;
   text-align: center;
   z-index: 20;
 }
@@ -607,12 +607,13 @@ dt {
   position: relative;
   font-size: 1.4rem;
   font-family: "Cardo", serif;
-  line-height: normal;
+  line-height: initial;
   font-weight: bold;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 /* ==========================================================================
-   SVG Circles
+   TONDO DEFAULT CLASSES
    ========================================================================== */
 .tondo {
   position: absolute;
@@ -620,8 +621,17 @@ dt {
   overflow: visible;
   fill: transparent;
   pointer-events: none;
+  will-change: transform;
+  visibility: hidden;
 }
 
+.tondo--loaded {
+  visibility: visible;
+}
+
+/* ==========================================================================
+   TONDO CUSTOM CLASSES
+   ========================================================================== */
 .tondo--small {
   font-size: 20px;
 }
@@ -647,5 +657,5 @@ dt {
 }
 
 .tondo--medium textPath {
-  fill: rgba(0, 0, 0, 0.8);
+  fill: rgba(0, 0, 0, 0.84);
 }

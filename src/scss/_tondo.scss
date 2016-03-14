@@ -34,7 +34,7 @@
     max-height: 220px;
     padding: 12px;
     border: 35px solid transparent;
-    background-color: $green;
+    background-color: $azure;
     text-align: center;
     z-index: 20;
 }
@@ -55,12 +55,13 @@
 	position: relative;
 	font-size: 1.4rem;
 	font-family: $body-alt-font-family;
-	line-height: normal;
+	line-height: initial;
 	font-weight: bold;
+	color: $secondary-text;
 }
 
 /* ==========================================================================
-   SVG Circles
+   TONDO DEFAULT CLASSES
    ========================================================================== */
 
 .tondo {
@@ -69,7 +70,17 @@
 	overflow: visible;
 	fill: transparent;
 	pointer-events: none;
+	will-change: transform;
+	visibility: hidden;
 }
+
+.tondo--loaded {
+	visibility: visible;
+}
+
+/* ==========================================================================
+   TONDO CUSTOM CLASSES
+   ========================================================================== */
 
 .tondo--small {
 	font-size: 20px;

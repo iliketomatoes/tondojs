@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Tondo.js</title>
-    <meta name="description" content="Pure Javascript, responsive, retina ready. Hardware accelerated, multi-serving lazy load images.">
+    <meta name="description" content="Tondo.js lets you easily create some SVG curved text to wrap HTML round badges">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="dist/assets/css/app.css">
     <!--[if lt IE 9]>
@@ -20,52 +20,13 @@
             <h1>Tondo.js</h1>
         </div>
     </header>
-    <!--<svg class="tondo-svg" width="100%" height="500px" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-            <path id="test-path" d="M 100 200 
-                                 C 200 100 300   0 400 100
-                                 C 500 200 600 300 700 200
-                                 C 800 100 900 100 900 100" />
-            <path id="circlePath" d=" M 150, 150 m -120, 0 a 120,120 0 0,1 240,0 a 120,120 0 0,1 -240,0 " />
-            <path id="testArc" d='M 430,183 A 53,51 0 1 1 456,182'/>
-            <path id="testArc2" d='M 491,410 a 168,168 0 1 1 1,0'/>
-        </defs>
-        <g>
-            <use xlink:href="#test-path" fill="none" stroke="red" />
-            <text font-family="Helvetica" font-size="20px">
-                <textPath xlink:href="#test-path" startOffset="50%" text-anchor="middle">
-                    est. 1926
-                </textPath>
-            </text>
-        </g>
-        <g>
-            <use xlink:href="#circlePath" fill="none" stroke="blue" />
-            <text font-family="Helvetica" font-size="30px">
-                <textPath xlink:href="#circlePath">A.C. Fiorentina</textPath>
-            </text>
-        </g>
-        <g>
-            <use xlink:href="#testArc" fill="none" stroke="green" />
-            <text font-family="Helvetica" font-size="20px">
-                <textPath xlink:href="#testArc">Test Arc</textPath>
-            </text>
-        </g>
-        <g>
-            <use xlink:href="#testArc2" fill="none" stroke="black" />
-            <text font-family="Helvetica" font-size="20px">
-                <textPath xlink:href="#testArc2" startOffset="50%" text-anchor="middle">Test Arc</textPath>
-            </text>
-        </g>
-        <rect x="1" y="1" width="998" height="498" fill="none" stroke="black" stroke-width="2" />
-    </svg>-->
     <div class="row">
         <div class="badge badge--big">
-                <p class="badge__paragraph white">Tondo.js lets you easily create great badges wrapped by some SVG curved text.</p>
+                <p class="badge__paragraph white">Tondo.js lets you easily create some SVG curved text to wrap HTML round badges</p>
         </div>
         <div class="badge badge--medium">
                 <p class="badge__paragraph">It is a new design trend for fall/winter 2016. I think</p>
         </div>
-
     </div>
     <div class="row">
         
@@ -85,42 +46,36 @@
             </dd>
         </dl>
     </div>
-    <!--<a href="https://github.com/iliketomatoes/elbajs"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>-->
+    <a href="https://github.com/iliketomatoes/tondojs"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"></a>
     <script src="dist/tondo.js"></script>
     <script>
     var circleText = new Tondo('.badge--purple', {
         customClass: 'tondo--small',
         tondoUp: {
-            text: 'A.C. Fiorentina',
-            gap: 4,
+            text: 'A.C. Fiorentina'
         },
         tondoDown: {
-            text: 'est. 1926',
-            gap: 20
+            text: 'est. 1926'
         }
     });
 
     var anotherCircle = new Tondo('.badge--big', {
         customClass: 'tondo--big',
         tondoUp: {
-            text: 'Isn\'t it cool?',
-            gap: 6,
+            text: 'Isn\'t it cool?'
         },
         tondoDown: {
-            text: 'Yes, I think it is :-)',
-            gap: 24
+            text: 'Yes, I think it is :-)'
         }
     });
 
     var thirdCircle = new Tondo('.badge--medium', {
         customClass: 'tondo--medium',
         tondoUp: {
-            text: 'This might really be a new trend',
-            gap: 6,
+            text: 'This might really be a new trend'
         },
         tondoDown: {
-            text: 'Maybe just for fashion blog. :-(',
-            gap: 26
+            text: 'Maybe just for fashion blogs'
         }
     });
     </script>
