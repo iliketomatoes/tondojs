@@ -54,6 +54,102 @@ dt {
 }
 
 
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+
+.badge {
+    position: relative;
+    overflow: hidden;
+    float: left;
+    margin-right: 3rem;
+    @include border-radius(50%);
+}
+
+.badge--big {
+    display: table;
+    width: 30vw;
+    height: 30vw;
+    max-width: 400px;
+    max-height: 400px;
+    padding: 12px;
+    border: 35px solid transparent;
+    background-color: nth($palette-1, 5);
+    text-align: center;
+    z-index: 20;
+    
+}
+
+
+.badge--medium {
+    display: table;
+    width: 30vw;
+    height: 30vw;
+    max-width: 220px;
+    max-height: 220px;
+    padding: 12px;
+    border: 35px solid transparent;
+    background-color: $azure;
+    text-align: center;
+    z-index: 20;
+}
+
+.badge--purple {
+    width: 150px;
+    height: 150px;
+    border: 22px solid $purple;
+}
+
+.badge__image {}
+
+.badge__paragraph {
+    // width: 100%;
+    // @include col-cstm(50%, 2);
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+    font-size: 1.4rem;
+    font-family: $body-alt-font-family;
+    line-height: initial;
+    font-weight: bold;
+    color: $secondary-text;
+}
+
+/* ==========================================================================
+   TONDO CUSTOM CLASSES
+   ========================================================================== */
+
+.tondo--small {
+    font-size: 20px;
+
+    textPath{
+        fill: #FFF;
+        font-weight: bold;
+    }
+}
+
+
+.tondo--big {
+    font-size: 26px;
+    font-family: $header-font-family;
+
+    textPath{
+        fill: nth($palette-1, 5);
+    }
+}
+
+
+.tondo--medium {
+    font-size: 22px;
+    font-weight: bold;
+    font-family: $body-font-family;
+
+    textPath{
+        fill: $primary-text;
+    }
+}
+
 /* ==========================================================================
    UTILITIES
    ========================================================================== */

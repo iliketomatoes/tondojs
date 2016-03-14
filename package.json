@@ -20,9 +20,6 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "^1.1.0"
   },
-  "dependencies": {
-    "bezier-easing": "^1.1.1"
-  },
   "main": "index.js",
   "keywords": [
     "svg",

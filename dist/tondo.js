@@ -83,6 +83,10 @@ function debounce(func, wait, immediate) {
     };
 }
 
+var rAF = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+var cAF = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
 var TondoModel = {
     init: function() {
         this.setLayout();
@@ -335,16 +339,17 @@ function Tondo(selector, options) {
 }
 
 var Eventie = {
-	init: function () {
-		var debouncedCheck = debounce(this.checkTargetsSizeChange, 300);
-		window.onresize = debouncedCheck;
-	},
-	checkTargetsSizeChange: function() {
-		console.log(Instances);
-		for(var i in Instances) {
-			Instances[i].setTondo();
-		}
-	}
+    init: function() {
+        var debouncedCheck = debounce(this.checkTargetsSizeChange, 300);
+        window.onresize = debouncedCheck;
+    },
+    checkTargetsSizeChange: function() {
+        rAF(function() {
+            for (var i in Instances) {
+                Instances[i].setTondo();
+            }
+        });
+    }
 };
 
 Eventie.init();
