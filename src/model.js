@@ -99,13 +99,14 @@ var TondoModel = {
             textPath.setAttribute('id', textPathID);
             textPath.setAttribute('startOffset', circles[j].startOffset);
             textPath.setAttribute('text-anchor', circles[j].textAnchor);
-            textPath.setAttribute('class', circles[j].textPathClass);
+            textPath.setAttribute('letter-spacing', circles[j].letterSpacing);
 
             content = circles[j].text;
 
             textPath.textContent = content;
 
             text = document.createElementNS(svgURI, 'text');
+            text.setAttribute('class', circles[j].textClass);
 
             text.appendChild(textPath);
 
@@ -173,7 +174,7 @@ var TondoModel = {
                 radius = this.getRadius(circles[i].gap);
                 circlePath.setAttribute('d', describeArc((sideLength / 2), sideLength - (this.proxy.gap - circles[i].gap), radius, 1));
             } else {
-                
+
                 // Such an empirical forumula :-)
                 if (circles[i].gap < 0) {
                     radius = this.getRadius(circles[i].gap);

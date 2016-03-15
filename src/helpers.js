@@ -44,7 +44,8 @@ function generateGUID() {
 function debounce(func, wait, immediate) {
     var timeout;
     return function() {
-        var context = this, args = arguments;
+        var context = this,
+            args = arguments;
         var later = function() {
             timeout = null;
             if (!immediate) func.apply(context, args);
@@ -54,6 +55,19 @@ function debounce(func, wait, immediate) {
         timeout = setTimeout(later, wait);
         if (callNow) func.apply(context, args);
     };
+}
+
+
+function turnArrayStringMapIntoObject(target) {
+    var kVArr,
+        tmp;
+
+    tmp = {};
+    target.forEach(function(keyValue, index) {
+        kVArr = keyValue.split(':');
+        if (kVArr[0]) tmp[kVArr[0]] = eval(kVArr[1]);
+    });
+    return tmp;
 }
 
 var rAF = window.requestAnimationFrame || window.mozRequestAnimationFrame ||

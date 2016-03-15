@@ -16,6 +16,16 @@ svg:not(:root) {
 	visibility: hidden;
 }
 
+.tondo-fixed {
+	position: fixed;
+	top: 0;
+	overflow: visible;
+	fill: transparent;
+	pointer-events: none;
+	will-change: transform;
+	visibility: hidden;
+}
+
 .tondo--loaded {
 	visibility: visible;
 }

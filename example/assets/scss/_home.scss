@@ -38,11 +38,8 @@
     @media #{$medium-up}{
       margin: 0 0 2rem;
     }
-
-   
     
 }
-
 
 .badge--medium {
     display: table;
@@ -150,7 +147,7 @@
 
 
 .tondo--azure {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 900;
     font-family: $body-font-family;
 
@@ -158,12 +155,8 @@
         fill: $secondary-text;
     }
 
-    @media #{$medium-up}{
-        font-size: 24px;
-    }
-
     @media #{$large-up}{
-      font-size: 32px;
+      font-size: 2rem;
     }
 }
 
@@ -171,6 +164,72 @@
     font-size: 1rem;
 }
 
+/* ==========================================================================
+   GITHUB ROUND BADGE
+   ========================================================================== */
+
+.github-round-badge {
+    display: inline-block;
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    @include border-radius(50%);
+    @include box_shadow(1);
+    background-color: $primary-color;
+    @include single-transition();
+
+    &:hover{
+        @include box_shadow(3);
+    }
+
+    &:active{
+        box-shadow: none;
+    }
+
+    svg {
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    @media #{$medium-up}{
+       background-color: $white; 
+       width: 75px;
+       height: 75px;
+       line-height: 75px;
+    }
+
+    @media #{$large-up}{
+       width: 90px;
+       height: 90px;
+       line-height: 90px;
+    }
+}
+
+.tondo-github__up, .tondo-github__down {
+    
+    visibility: hidden;
+    fill: $primary-color;
+    text-transform: uppercase;
+
+    @media #{$medium-up}{
+       visibility: visible;  
+       font-size: 12px;
+    }
+
+    @media #{$large-up}{
+       font-size: 14px;
+    }
+}
+
+.tondo-github__up { 
+}
+
+.tondo-github__down {
+}
 /* ==========================================================================
    TYPOGRAPHY
    ========================================================================== */

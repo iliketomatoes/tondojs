@@ -1,4 +1,4 @@
-/*! tondo.js - v0.0.1 - 2016-03-14
+/*! tondo.js - v0.0.1 - 2016-03-15
 * https://github.com/iliketomatoes/tondojs
 * Copyright (c) 2016 ; Licensed  */
 (function(window, factory) {
@@ -71,7 +71,8 @@ function generateGUID() {
 function debounce(func, wait, immediate) {
     var timeout;
     return function() {
-        var context = this, args = arguments;
+        var context = this,
+            args = arguments;
         var later = function() {
             timeout = null;
             if (!immediate) func.apply(context, args);
@@ -83,10 +84,24 @@ function debounce(func, wait, immediate) {
     };
 }
 
+
+function turnArrayStringMapIntoObject(target) {
+    var kVArr,
+        tmp;
+
+    tmp = {};
+    target.forEach(function(keyValue, index) {
+        kVArr = keyValue.split(':');
+        if (kVArr[0]) tmp[kVArr[0]] = eval(kVArr[1]);
+    });
+    return tmp;
+}
+
 var rAF = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
     window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
 var cAF = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
 var TondoModel = {
     init: function() {
         this.setLayout();
@@ -188,13 +203,14 @@ var TondoModel = {
             textPath.setAttribute('id', textPathID);
             textPath.setAttribute('startOffset', circles[j].startOffset);
             textPath.setAttribute('text-anchor', circles[j].textAnchor);
-            textPath.setAttribute('class', circles[j].textPathClass);
+            textPath.setAttribute('letter-spacing', circles[j].letterSpacing);
 
             content = circles[j].text;
 
             textPath.textContent = content;
 
             text = document.createElementNS(svgURI, 'text');
+            text.setAttribute('class', circles[j].textClass);
 
             text.appendChild(textPath);
 
@@ -262,7 +278,7 @@ var TondoModel = {
                 radius = this.getRadius(circles[i].gap);
                 circlePath.setAttribute('d', describeArc((sideLength / 2), sideLength - (this.proxy.gap - circles[i].gap), radius, 1));
             } else {
-                
+
                 // Such an empirical forumula :-)
                 if (circles[i].gap < 0) {
                     radius = this.getRadius(circles[i].gap);
@@ -282,6 +298,11 @@ var TondoModel = {
 
 function Tondo(selector, options) {
 
+    var settings,
+        targetElements,
+        GUID,
+        i;
+
     var _defaults = {
         defaultClass: 'tondo',
         customClass: '',
@@ -291,8 +312,9 @@ function Tondo(selector, options) {
             side: 'up',
             startOffset: '50%',
             textAnchor: 'middle',
-            textPathClass: '',
+            textClass: '',
             fontSize: '',
+            letterSpacing: ''
         },
         tondoDown: {
             text: '',
@@ -300,8 +322,9 @@ function Tondo(selector, options) {
             side: 'down',
             startOffset: '50%',
             textAnchor: 'middle',
-            textPathClass: '',
-            fontSize: ''
+            textClass: '',
+            fontSize: '',
+            letterSpacing: '',
         }
     };
 
@@ -326,17 +349,55 @@ function Tondo(selector, options) {
         });
     };
 
-    // Extend default options
-    var settings = extend(_defaults, options);
+    var _extendElementDataAttributes = function(targetEl) {
+        var tondoUp,
+            tondoDown,
+            evaluatedOptions,
+            tondoUpData,
+            tondoDownData,
+            tmp;
+
+        tmp = targetEl.dataset;
+        evaluatedOptions = {};
+        if (tmp.tondoUp) {
+            tondoUpData = tmp.tondoUp.split(';');
+            tondoUp = turnArrayStringMapIntoObject(tondoUpData);
+            evaluatedOptions['tondoUp'] = tondoUp;
+        }
+        if (tmp.tondoDown) {
+            tondoDownData = tmp.tondoDown.split(';');
+            tondoDown = turnArrayStringMapIntoObject(tondoDownData);
+            evaluatedOptions['tondoDown'] = tondoDown;
+        }
+
+        if (tmp.defaultClass) evaluatedOptions['defaultClass'] = tmp.defaultClass;
+        if (tmp.customClass) evaluatedOptions['customClass'] = tmp.customClass;
+
+        return extend(_defaults, evaluatedOptions);
+    };
 
     this.instances = [];
 
-    var targetElements = document.querySelectorAll(selector);
+    if (selector === '' || typeof selector === 'undefined') {
+        targetElements = document.querySelectorAll('*[data-tondo]');
+    } else {
+        targetElements = document.querySelectorAll(selector);
+    }
 
-    var i = 0;
+    // Extend settings, if options are passed
+    settings = null;
+
+    if (typeof options === 'object' && options !== null) {
+        // Extend default options
+        settings = extend(_defaults, options);
+    }
+
+
+    i = 0;
 
     while (targetElements[i]) {
-        var GUID = generateGUID();
+        GUID = generateGUID();
+        if (!settings) settings = _extendElementDataAttributes(targetElements[i]);
         Instances[GUID] = _createInstance(targetElements[i], GUID, settings);
         Instances[GUID].init();
         this.instances.push(GUID);

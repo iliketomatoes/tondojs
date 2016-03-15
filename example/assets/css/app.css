@@ -2194,7 +2194,7 @@ p + .stat {
 }
 
 .tondo--azure {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 900;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -2203,20 +2203,84 @@ p + .stat {
   fill: rgba(0, 0, 0, 0.6);
 }
 
-@media screen and (min-width: 40em) {
-  .tondo--azure {
-    font-size: 24px;
-  }
-}
-
 @media screen and (min-width: 64em) {
   .tondo--azure {
-    font-size: 32px;
+    font-size: 2rem;
   }
 }
 
 .textPath-small {
   font-size: 1rem;
+}
+
+/* ==========================================================================
+   GITHUB ROUND BADGE
+   ========================================================================== */
+.github-round-badge {
+  display: inline-block;
+  position: fixed;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background-clip: padding-box;
+  /* stops bg color from leaking outside the border: */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #2199e8;
+  transition: all 300ms ease-out;
+}
+
+.github-round-badge:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.github-round-badge:active {
+  box-shadow: none;
+}
+
+.github-round-badge svg {
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+@media screen and (min-width: 40em) {
+  .github-round-badge {
+    background-color: #fefefe;
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .github-round-badge {
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+  }
+}
+
+.tondo-github__up, .tondo-github__down {
+  visibility: hidden;
+  fill: #2199e8;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 40em) {
+  .tondo-github__up, .tondo-github__down {
+    visibility: visible;
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .tondo-github__up, .tondo-github__down {
+    font-size: 14px;
+  }
 }
 
 /* ==========================================================================

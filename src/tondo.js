@@ -1,5 +1,10 @@
 function Tondo(selector, options) {
 
+    var settings,
+        targetElements,
+        GUID,
+        i;
+
     var _defaults = {
         defaultClass: 'tondo',
         customClass: '',
@@ -9,8 +14,9 @@ function Tondo(selector, options) {
             side: 'up',
             startOffset: '50%',
             textAnchor: 'middle',
-            textPathClass: '',
+            textClass: '',
             fontSize: '',
+            letterSpacing: ''
         },
         tondoDown: {
             text: '',
@@ -18,8 +24,9 @@ function Tondo(selector, options) {
             side: 'down',
             startOffset: '50%',
             textAnchor: 'middle',
-            textPathClass: '',
-            fontSize: ''
+            textClass: '',
+            fontSize: '',
+            letterSpacing: '',
         }
     };
 
@@ -44,17 +51,55 @@ function Tondo(selector, options) {
         });
     };
 
-    // Extend default options
-    var settings = extend(_defaults, options);
+    var _extendElementDataAttributes = function(targetEl) {
+        var tondoUp,
+            tondoDown,
+            evaluatedOptions,
+            tondoUpData,
+            tondoDownData,
+            tmp;
+
+        tmp = targetEl.dataset;
+        evaluatedOptions = {};
+        if (tmp.tondoUp) {
+            tondoUpData = tmp.tondoUp.split(';');
+            tondoUp = turnArrayStringMapIntoObject(tondoUpData);
+            evaluatedOptions['tondoUp'] = tondoUp;
+        }
+        if (tmp.tondoDown) {
+            tondoDownData = tmp.tondoDown.split(';');
+            tondoDown = turnArrayStringMapIntoObject(tondoDownData);
+            evaluatedOptions['tondoDown'] = tondoDown;
+        }
+
+        if (tmp.defaultClass) evaluatedOptions['defaultClass'] = tmp.defaultClass;
+        if (tmp.customClass) evaluatedOptions['customClass'] = tmp.customClass;
+
+        return extend(_defaults, evaluatedOptions);
+    };
 
     this.instances = [];
 
-    var targetElements = document.querySelectorAll(selector);
+    if (selector === '' || typeof selector === 'undefined') {
+        targetElements = document.querySelectorAll('*[data-tondo]');
+    } else {
+        targetElements = document.querySelectorAll(selector);
+    }
 
-    var i = 0;
+    // Extend settings, if options are passed
+    settings = null;
+
+    if (typeof options === 'object' && options !== null) {
+        // Extend default options
+        settings = extend(_defaults, options);
+    }
+
+
+    i = 0;
 
     while (targetElements[i]) {
-        var GUID = generateGUID();
+        GUID = generateGUID();
+        if (!settings) settings = _extendElementDataAttributes(targetElements[i]);
         Instances[GUID] = _createInstance(targetElements[i], GUID, settings);
         Instances[GUID].init();
         this.instances.push(GUID);
