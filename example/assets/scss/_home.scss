@@ -9,7 +9,7 @@
 }
 
 .home-section {
-    padding: 2rem 0;
+    padding: 0.2rem 0 1rem;
 }
 
 /* ==========================================================================
@@ -20,7 +20,11 @@
     position: relative;
     overflow: hidden;
     @include border-radius(50%);
-    margin-bottom: 2rem;
+    margin: 2rem auto;
+
+    @media #{$medium-up}{
+      margin: 0 0 2rem;
+    }
 }
 
 .badge--big {
@@ -31,14 +35,9 @@
     max-height: 350px;
     min-width: 240px;
     min-height: 240px;
-    margin: 0 auto 2rem;
+    
     padding: 12px;
     text-align: center;
-
-    @media #{$medium-up}{
-      margin: 0 0 2rem;
-    }
-    
 }
 
 .badge--medium {

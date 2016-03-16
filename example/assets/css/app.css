@@ -2047,7 +2047,7 @@ p + .stat {
 }
 
 .home-section {
-  padding: 2rem 0;
+  padding: 0.2rem 0 1rem;
 }
 
 /* ==========================================================================
@@ -2060,7 +2060,13 @@ p + .stat {
   border-radius: 50%;
   background-clip: padding-box;
   /* stops bg color from leaking outside the border: */
-  margin-bottom: 2rem;
+  margin: 2rem auto;
+}
+
+@media screen and (min-width: 40em) {
+  .badge {
+    margin: 0 0 2rem;
+  }
 }
 
 .badge--big {
@@ -2071,15 +2077,8 @@ p + .stat {
   max-height: 350px;
   min-width: 240px;
   min-height: 240px;
-  margin: 0 auto 2rem;
   padding: 12px;
   text-align: center;
-}
-
-@media screen and (min-width: 40em) {
-  .badge--big {
-    margin: 0 0 2rem;
-  }
 }
 
 .badge--medium {
@@ -2108,7 +2107,7 @@ p + .stat {
 }
 
 .badge--brown {
-  background-color: #96281B;
+  background-color: #8b4513;
   border-color: transparent;
 }
 
@@ -2200,7 +2199,7 @@ p + .stat {
 }
 
 .tondo--brown textPath {
-  fill: #F7CA18;
+  fill: #F4B350;
 }
 
 @media screen and (min-width: 64em) {
