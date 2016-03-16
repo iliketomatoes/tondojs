@@ -54,12 +54,14 @@
     <div class="home-section">
         <div class="row">
             <div class="small-12 medium-7 columns">
-                <h2>This plugin is different.</h2>
-                <p>It just takes <i>~5kB</i> of plain Javascript, and a couple of CSS rules. With Tondo.js, an SVG element gets absolutely placed over the HTML target. Inside that SVG element, Tondo draws up to 2 arcs, one for placing text on the top of the circle, the other one for placing text on the bottom.</p>
-                <p>This plugin only makes sense when you <strong>target a round HTML element</strong>.</p>
+                <article>
+                    <h2>This plugin is different.</h2>
+                    <p>It just takes <i>~5kB</i> of plain Javascript, and a couple of CSS rules. With Tondo.js, an SVG element gets absolutely placed over the HTML target. Inside that SVG element, Tondo draws up to 2 arcs, one for placing text on the top of the circle, the other one for placing text on the bottom.</p>
+                    <p>This plugin only makes sense when you <strong>target a round HTML element</strong>.</p>
+                </article>
             </div>
             <div class="small-12 medium-5 columns">
-                <div class="badge badge--big badge--azure">
+                <div class="badge badge--big badge--brown">
                     <p class="badge__paragraph white">It is a new design trend for the next season. You'll see it everywhere.</p>
                 </div>
             </div>
@@ -67,13 +69,14 @@
     </div>
     <div class="home-section">
         <div class="row">
-            <div class="small-12 medium-5 columns">
+            <div class="small-12 medium-7 medium-push-5 columns">
+                <article>
+                    <h3>You can get this plugin and find its documentation on <a href="https://github.com/iliketomatoes/tondojs">Github</a>.</h3>
+            </div>
+            <div class="small-12 medium-5 medium-pull-7 columns">
                 <div class="badge badge--big badge--dark">
                     <p class="badge__paragraph badge__paragraph--bio">You can find me on <a href="https://twitter.com/GSoverini/">Twitter</a> and on <a href="https://github.com/iliketomatoes">Github</a></p>
                 </div>
-            </div>
-            <div class="small-12 medium-7 columns">
-                <h2>TODO documentation</h2>
             </div>
         </div>
     </div>
@@ -94,8 +97,8 @@
         }
     });
 
-    var secondCircle = new Tondo('.badge--azure', {
-        customClass: 'tondo--azure',
+    var secondCircle = new Tondo('.badge--brown', {
+        customClass: 'tondo--brown',
         tondoUp: {
             text: 'Fall winter',
             gap: -32

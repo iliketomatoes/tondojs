@@ -64,8 +64,8 @@
     }
 }
 
-.badge--azure {
-    background-color: $azure;
+.badge--brown {
+    background-color: $brown;
     border-color: transparent;
 
     @media #{$medium-up}{
@@ -146,13 +146,13 @@
 }
 
 
-.tondo--azure {
+.tondo--brown {
     font-size: 1.5rem;
     font-weight: 900;
     font-family: $body-font-family;
 
     textPath{
-        fill: $secondary-text;
+        fill: $yellow;
     }
 
     @media #{$large-up}{

@@ -2107,13 +2107,13 @@ p + .stat {
   }
 }
 
-.badge--azure {
-  background-color: #4B77BE;
+.badge--brown {
+  background-color: #96281B;
   border-color: transparent;
 }
 
 @media screen and (min-width: 40em) {
-  .badge--azure {
+  .badge--brown {
     float: right;
   }
 }
@@ -2193,18 +2193,18 @@ p + .stat {
   }
 }
 
-.tondo--azure {
+.tondo--brown {
   font-size: 1.5rem;
   font-weight: 900;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.tondo--azure textPath {
-  fill: rgba(0, 0, 0, 0.6);
+.tondo--brown textPath {
+  fill: #F7CA18;
 }
 
 @media screen and (min-width: 64em) {
-  .tondo--azure {
+  .tondo--brown {
     font-size: 2rem;
   }
 }
