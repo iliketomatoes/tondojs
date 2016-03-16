@@ -396,9 +396,9 @@ function Tondo(selector, options) {
     i = 0;
 
     while (targetElements[i]) {
+        var tmpSettings = settings || _extendElementDataAttributes(targetElements[i]);
         GUID = generateGUID();
-        if (!settings) settings = _extendElementDataAttributes(targetElements[i]);
-        Instances[GUID] = _createInstance(targetElements[i], GUID, settings);
+        Instances[GUID] = _createInstance(targetElements[i], GUID, tmpSettings);
         Instances[GUID].init();
         this.instances.push(GUID);
         i++;
