@@ -1,4 +1,4 @@
-/*! tondo.js - v0.0.1 - 2016-03-15
+/*! tondo.js - v0.0.1 - 2016-03-16
 * https://github.com/iliketomatoes/tondojs
 * Copyright (c) 2016 ; Licensed  */
 (function(window, factory) {
@@ -7,11 +7,11 @@
 
     if (typeof define === 'function' && define.amd) {
         // Register Tondo as an AMD module
-        define(factory());
+        define(factory);
 
     } else if (typeof module == 'object' && module.exports) {
         // Register Tondo for CommonJS
-        module.exports = factory();
+        module.exports = factory;
 
     } else {
         // Register Tondo on window
