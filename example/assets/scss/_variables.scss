@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Carrois+Gothic+SC|Cardo:400,400italic,700);
+@import url(https://fonts.googleapis.com/css?family=Carrois+Gothic+SC|Cardo:400,400italic,700|Playfair+Display+SC:400,700);
 
 $body-bg-color: #F2EEEB;
 
@@ -6,8 +6,9 @@ $primary-text: rgba(0,0,0,.84);
 $secondary-text: rgba(0,0,0,.6);
 
 $header-custom-font-family: 'Carrois Gothic SC', sans-serif;
-$body-custom-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$body-custom-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $body-alt-font-family: 'Cardo', serif;
+$fashion-font-family: 'Playfair Display SC', serif;
 
 $palette-1: #F1F2EB, #06D6A0, #6B6D5E, #4B77BE, #8E44AD;
 
@@ -18,6 +19,9 @@ $green: nth($palette-1, 2);
 $light-gray: nth($palette-1, 1);
 
 $brown: #8b4513;
-$yellow: #F4B350;
+$yellow: #FFB31A;
+$blue: #0C337B;
+$pink: #E6D5E4;
+$sand: #DDC16F;
 
 $header-font-color: $purple;

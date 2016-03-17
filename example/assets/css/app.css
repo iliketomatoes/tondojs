@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Carrois+Gothic+SC|Cardo:400,400italic,700);
+@import url(https://fonts.googleapis.com/css?family=Carrois+Gothic+SC|Cardo:400,400italic,700|Playfair+Display+SC:400,700);
 /**
  * Foundation for Sites by ZURB
  * Version 6.2.0
@@ -2070,14 +2070,12 @@ p + .stat {
 }
 
 .badge--big {
-  display: table;
   width: 30vw;
   height: 30vw;
   max-width: 350px;
   max-height: 350px;
   min-width: 240px;
   min-height: 240px;
-  padding: 12px;
   text-align: center;
 }
 
@@ -2094,6 +2092,8 @@ p + .stat {
 }
 
 .badge--purple {
+  display: table;
+  padding: 12px;
   border-width: 25px;
   border-style: solid;
   background-color: #8E44AD;
@@ -2106,18 +2106,20 @@ p + .stat {
   }
 }
 
-.badge--brown {
-  background-color: #8b4513;
+.badge--trendy {
+  background: transparent url(../images/fashion-woman-model-portrait.jpg) center no-repeat;
   border-color: transparent;
 }
 
 @media screen and (min-width: 40em) {
-  .badge--brown {
+  .badge--trendy {
     float: right;
   }
 }
 
-.badge--dark {
+.badge--green-border {
+  display: table;
+  padding: 12px;
   border-width: 30px;
   border-style: solid;
   background-color: #fefefe;
@@ -2125,15 +2127,18 @@ p + .stat {
 }
 
 @media screen and (min-width: 64em) {
-  .badge--dark {
+  .badge--green-border {
     border-width: 35px;
   }
 }
 
-.badge--fiorentina {
-  width: 150px;
-  height: 150px;
-  border: 22px solid #8E44AD;
+.badge__layer {
+  position: absolute;
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.65);
 }
 
 .badge__paragraph {
@@ -2166,16 +2171,6 @@ p + .stat {
 /* ==========================================================================
    TONDO CUSTOM CLASSES
    ========================================================================== */
-.tondo--dark {
-  font-size: 20px;
-  font-family: "Cardo", serif;
-}
-
-.tondo--dark textPath {
-  fill: rgba(0, 0, 0, 0.6);
-  font-weight: bold;
-}
-
 .tondo--purple {
   font-size: 18px;
   font-family: "Carrois Gothic SC", sans-serif;
@@ -2192,20 +2187,30 @@ p + .stat {
   }
 }
 
-.tondo--brown {
+.tondo--trendy {
   font-size: 1.5rem;
-  font-weight: 900;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-family: "Playfair Display SC", serif;
 }
 
-.tondo--brown textPath {
-  fill: #F4B350;
+.tondo--trendy textPath {
+  fill: #000;
 }
 
 @media screen and (min-width: 64em) {
-  .tondo--brown {
+  .tondo--trendy {
     font-size: 2rem;
   }
+}
+
+.tondo--green-border {
+  font-size: 20px;
+  font-family: "Cardo", serif;
+}
+
+.tondo--green-border textPath {
+  fill: rgba(0, 0, 0, 0.6);
+  font-weight: bold;
 }
 
 .textPath-small {
@@ -2263,21 +2268,24 @@ p + .stat {
   }
 }
 
-.tondo-github__up, .tondo-github__down {
+.tondo-github__up,
+.tondo-github__down {
   visibility: hidden;
   fill: #2199e8;
   text-transform: uppercase;
 }
 
 @media screen and (min-width: 40em) {
-  .tondo-github__up, .tondo-github__down {
+  .tondo-github__up,
+  .tondo-github__down {
     visibility: visible;
     font-size: 12px;
   }
 }
 
 @media screen and (min-width: 64em) {
-  .tondo-github__up, .tondo-github__down {
+  .tondo-github__up,
+  .tondo-github__down {
     font-size: 14px;
   }
 }
