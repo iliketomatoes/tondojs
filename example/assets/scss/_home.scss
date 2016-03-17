@@ -9,8 +9,18 @@
 }
 
 .home-section {
+    margin: 1rem 0;
     padding: 0.2rem 0 1rem;
+
+    @media #{$medium-up} {
+        margin: 2rem 0;
+    }
+
+    @media #{$large-up} {
+        margin: 3rem 0;
+    }
 }
+
 
 /* ==========================================================================
    Badges
@@ -21,22 +31,18 @@
     overflow: hidden;
     @include border-radius(50%);
     margin: 2rem auto;
-
-    @media #{$medium-up}{
-      margin: 0 0 2rem;
+    @media #{$medium-up} {
+        margin: 0 0 2rem;
     }
 }
 
 .badge--big {
-    display: table;
     width: 30vw;
     height: 30vw;
     max-width: 350px;
     max-height: 350px;
     min-width: 240px;
     min-height: 240px;
-    
-    padding: 12px;
     text-align: center;
 }
 
@@ -53,47 +59,47 @@
 }
 
 .badge--purple {
+    display: table;
+    padding: 12px;
     border-width: 25px;
     border-style: solid;
     background-color: nth($palette-1, 5);
     border-color: $white;
-
-     @media #{$large-up}{
-      border-width: 35px;
+    @media #{$large-up} {
+        border-width: 35px;
     }
 }
 
-.badge--brown {
-    background-color: $brown;
+.badge--trendy {
+    background: transparent url(../images/fashion-woman-model-portrait.jpg) center no-repeat;
     border-color: transparent;
-
-    @media #{$medium-up}{
-      float: right;
+    @media #{$medium-up} {
+        float: right;
     }
 }
 
-.badge--dark {
+.badge--green-border {
+    display: table;
+    padding: 12px;
     border-width: 30px;
     border-style: solid;
     background-color: $white;
     border-color: $green;
-
-     @media #{$large-up}{
-      border-width: 35px;
+    @media #{$large-up} {
+        border-width: 35px;
     }
 }
 
-.badge--fiorentina {
-    width: 150px;
-    height: 150px;
-    border: 22px solid $purple;
+.badge__layer {
+    position: absolute;
+    display: table;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    background-color: rgba(#000, 0.65);
 }
 
-.badge__image {}
-
 .badge__paragraph {
-    // width: 100%;
-    // @include col-cstm(50%, 2);
     display: table-cell;
     vertical-align: middle;
     position: relative;
@@ -102,66 +108,60 @@
     line-height: initial;
     font-weight: bold;
     color: $secondary-text;
-
-     @media #{$large-up}{
-      font-size: 1.4rem;
+    @media #{$large-up} {
+        font-size: 1.4rem;
     }
 }
 
 .badge__paragraph--bio {
     font-family: $body-font-family;
-    @media #{$large-up}{
-      font-size: 1.2rem;
+    @media #{$large-up} {
+        font-size: 1.2rem;
     }
 }
+
 
 /* ==========================================================================
    TONDO CUSTOM CLASSES
    ========================================================================== */
 
-.tondo--dark {
+.tondo--purple {
+    font-size: 18px;
+    font-family: $header-font-family;
+    text-transform: uppercase;
+    textPath {
+        fill: nth($palette-1, 5);
+    }
+    @media #{$large-up} {
+        font-size: 26px;
+    }
+}
+
+.tondo--trendy {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: $fashion-font-family;
+    textPath {
+        fill: #000;
+    }
+    @media #{$large-up} {
+        font-size: 2rem;
+    }
+}
+
+.tondo--green-border {
     font-size: 20px;
     font-family: $body-alt-font-family;
-
-    textPath{
+    textPath {
         fill: $secondary-text;
         font-weight: bold;
     }
 }
 
-
-.tondo--purple {
-    font-size: 18px;
-    font-family: $header-font-family;
-    text-transform: uppercase;
-
-    textPath{
-        fill: nth($palette-1, 5);
-    }
-
-    @media #{$large-up}{
-      font-size: 26px;
-    }
-}
-
-
-.tondo--brown {
-    font-size: 1.5rem;
-    font-weight: 900;
-    font-family: $body-font-family;
-
-    textPath{
-        fill: $yellow;
-    }
-
-    @media #{$large-up}{
-      font-size: 2rem;
-    }
-}
-
-.textPath-small{
+.textPath-small {
     font-size: 1rem;
 }
+
 
 /* ==========================================================================
    GITHUB ROUND BADGE
@@ -180,55 +180,44 @@
     @include box_shadow(1);
     background-color: $primary-color;
     @include single-transition();
-
-    &:hover{
+    &:hover {
         @include box_shadow(3);
     }
-
-    &:active{
+    &:active {
         box-shadow: none;
     }
-
     svg {
         vertical-align: middle;
         margin-top: -2px;
     }
-
-    @media #{$medium-up}{
-       background-color: $white; 
-       width: 75px;
-       height: 75px;
-       line-height: 75px;
+    @media #{$medium-up} {
+        background-color: $white;
+        width: 75px;
+        height: 75px;
+        line-height: 75px;
     }
-
-    @media #{$large-up}{
-       width: 90px;
-       height: 90px;
-       line-height: 90px;
+    @media #{$large-up} {
+        width: 90px;
+        height: 90px;
+        line-height: 90px;
     }
 }
 
-.tondo-github__up, .tondo-github__down {
-    
+.tondo-github__up,
+.tondo-github__down {
     visibility: hidden;
     fill: $primary-color;
     text-transform: uppercase;
-
-    @media #{$medium-up}{
-       visibility: visible;  
-       font-size: 12px;
+    @media #{$medium-up} {
+        visibility: visible;
+        font-size: 12px;
     }
-
-    @media #{$large-up}{
-       font-size: 14px;
+    @media #{$large-up} {
+        font-size: 14px;
     }
 }
 
-.tondo-github__up { 
-}
 
-.tondo-github__down {
-}
 /* ==========================================================================
    TYPOGRAPHY
    ========================================================================== */
