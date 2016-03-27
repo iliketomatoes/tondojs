@@ -2047,7 +2047,20 @@ p + .stat {
 }
 
 .home-section {
+  margin: 1rem 0;
   padding: 0.2rem 0 1rem;
+}
+
+@media screen and (min-width: 40em) {
+  .home-section {
+    margin: 2rem 0;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .home-section {
+    margin: 3rem 0;
+  }
 }
 
 /* ==========================================================================

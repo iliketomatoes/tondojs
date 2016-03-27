@@ -9,7 +9,16 @@
 }
 
 .home-section {
+    margin: 1rem 0;
     padding: 0.2rem 0 1rem;
+
+    @media #{$medium-up} {
+        margin: 2rem 0;
+    }
+
+    @media #{$large-up} {
+        margin: 3rem 0;
+    }
 }
 
 
